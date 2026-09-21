@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suryaprakash | AI | Associate SWE QA</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons (Phosphor Icons for a clean, tech look) -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#050505',
+                            card: '#111111',
+                            neon: '#00f2fe',
+                            purple: '#4facfe',
+                            accent: '#8b5cf6'
+                        }
+                    },
+                    animation: {
+                        'blob': 'blob 7s infinite',
+                        'gradient': 'gradient 8s ease infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        },
+                        gradient: {
+                            '0%, 100%': { backgroundPosition: '0% 50%' },
+                            '50%': { backgroundPosition: '100% 50%' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Custom CSS for Glassmorphism & Effects -->
+    <style>
+        body {
+            background-color: #050505;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+        
+        /* Glassmorphism utility */
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .glass-card {
+            background: linear-gradient(145deg, rgba(30, 30, 30, 0.6) 0%, rgba(15, 15, 15, 0.8) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.3s ease;
+        }
+        
+        .glass-card:hover {
+            border-color: rgba(139, 92, 246, 0.5);
+            box-shadow: 0 0 30px rgba(139, 92, 246, 0.15);
+            transform: translateY(-5px);
+        }
+
+        /* Neon Text Gradient */
+        .text-neon-gradient {
+            background: linear-gradient(to right, #00f2fe, #4facfe, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+        }
+        
+        /* Background grid pattern */
+        .bg-grid {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+        }
+    </style>
+</head>
+<body class="antialiased relative selection:bg-brand-accent selection:text-white">
+
+    <!-- Interactive Canvas Background (Neural Network) -->
+    <canvas id="neural-canvas" class="fixed inset-0 w-full h-full -z-20 pointer-events-none"></canvas>
+
+    <!-- Ambient Background Blobs -->
+    <div class="fixed inset-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
+        <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-brand-purple/20 blur-[120px] mix-blend-screen animate-blob"></div>
+        <div class="absolute top-[20%] right-[-10%] w-[40%] h-[40%] rounded-full bg-brand-accent/20 blur-[120px] mix-blend-screen animate-blob animation-delay-2000"></div>
+        <div class="absolute bottom-[-20%] left-[20%] w-[50%] h-[50%] rounded-full bg-brand-neon/10 blur-[120px] mix-blend-screen animate-blob animation-delay-4000"></div>
+        <div class="absolute inset-0 bg-grid w-full h-full"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 transition-all duration-300" id="navbar">
+        <div class="glass mx-auto max-w-6xl mt-4 rounded-2xl px-6 py-4 flex justify-between items-center w-[95%] lg:w-full">
+            <a href="#" class="font-display font-bold text-xl tracking-wider text-white flex items-center gap-2">
+                <i class="ph-fill ph-code text-brand-neon text-2xl"></i>
+                <span class="hidden sm:block">Surya<span class="text-brand-accent"></span></span>
+            </a>
+            
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex gap-8 text-sm font-medium text-gray-300">
+                <a href="#about" class="hover:text-white hover:text-shadow-sm transition-all">About</a>
+                <a href="#skills" class="hover:text-white transition-all">Skills</a>
+                <a href="#experience" class="hover:text-white transition-all">Experience</a>
+                <a href="#education" class="hover:text-white transition-all">Education</a>
+                <a href="#projects" class="hover:text-white transition-all">Projects</a>
+                <a href="#contact" class="hover:text-white transition-all">Contact</a>
+            </div>
+            
+            <a href="#contact" class="hidden md:inline-flex items-center justify-center px-5 py-2 text-sm font-medium text-white bg-white/10 border border-white/20 rounded-full hover:bg-white/20 hover:border-brand-neon transition-all">
+                Let's Talk
+            </a>
+
+            <!-- Mobile Menu Toggle -->
+            <button id="mobile-menu-btn" class="md:hidden text-gray-300 hover:text-white focus:outline-none">
+                <i class="ph ph-list text-2xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="hidden absolute top-20 left-[2.5%] right-[2.5%] glass rounded-2xl p-4 flex flex-col gap-4 shadow-2xl">
+            <a href="#about" class="mobile-link text-gray-300 hover:text-white p-2">About</a>
+            <a href="#skills" class="mobile-link text-gray-300 hover:text-white p-2">Skills</a>
+            <a href="#experience" class="mobile-link text-gray-300 hover:text-white p-2">Experience</a>
+            <a href="#education" class="mobile-link text-gray-300 hover:text-white p-2">Education</a>
+            <a href="#projects" class="mobile-link text-gray-300 hover:text-white p-2">Projects</a>
+            <a href="#contact" class="mobile-link text-gray-300 hover:text-white p-2">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden px-4">
+        <div class="max-w-4xl mx-auto text-center z-10">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 text-xs sm:text-sm font-medium text-gray-300 mb-8 backdrop-blur-md">
+                <span class="w-2 h-2 rounded-full bg-brand-neon animate-pulse"></span>
+                Hi, I'm Suryaprakassh Balusamy
+            </div>
+            
+            <h1 class="font-display text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-tight mb-6">
+                Bridging QA Excellence with
+                <span class="block text-neon-gradient animate-gradient">Artificial Intelligence</span>
+            </h1>
+            
+            <p class="mt-4 text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+                Associate Software Engineer QA @ <span class="text-white font-semibold">Zscaler</span> | 
+                <span class="text-brand-purple">AI Enthusiast</span> building intelligent, robust solutions.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a href="#projects" class="group relative px-8 py-3 rounded-full bg-white text-black font-semibold overflow-hidden transition-all hover:scale-105">
+                    <div class="absolute inset-0 w-full h-full bg-gradient-to-r from-brand-neon to-brand-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"></div>
+                    <span class="relative z-10 group-hover:text-white flex items-center gap-2">
+                        View Projects <i class="ph ph-arrow-right"></i>
+                    </span>
+                </a>
+                <a href="https://github.com/suryaprakashrbm-source" class="px-8 py-3 rounded-full glass border border-white/20 text-white font-medium hover:bg-white/10 transition-all flex items-center gap-2">
+                    <i class="ph ph-github-logo text-xl"></i> GitHub Profile
+                </a>
+            </div>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center animate-bounce opacity-50">
+            <span class="text-xs uppercase tracking-widest text-gray-400 mb-2">Scroll</span>
+            <i class="ph ph-caret-down text-xl"></i>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 relative z-10 px-4">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <h2 class="font-display text-3xl md:text-5xl font-bold">
+                        My Journey <br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent to-brand-purple">From QA to AI</span>
+                    </h2>
+                    <p class="text-gray-300 leading-relaxed text-lg">
+                        As an Associate Software Engineer QA at <strong class="text-white">Zscaler</strong>, I've honed my skills in ensuring software reliability, performance, and delivering flawless user experiences. My foundation is built on meticulous testing and automation.
+                    </p>
+                    <p class="text-gray-300 leading-relaxed text-lg">
+                        Currently, I am expanding my horizons into the fascinating world of Artificial Intelligence. I am passionate about bridging the gap between rigorous quality assurance and cutting-edge AI technologies. By leveraging LLMs, Machine Learning, and NLP, I aim to build intelligent agents and robust solutions that push the boundaries of what's possible.
+                    </p>
+                </div>
+                
+                <div class="relative w-full aspect-square md:aspect-auto md:h-[400px] flex items-center justify-center animate-float">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-brand-accent/20 to-brand-neon/20 rounded-3xl blur-2xl"></div>
+                    <div class="glass-card w-full h-full rounded-3xl p-8 flex flex-col justify-center items-center text-center relative z-10 border border-white/10">
+                        <div class="w-24 h-24 rounded-full glass flex items-center justify-center mb-6">
+                            <i class="ph-duotone ph-brain text-5xl text-brand-neon"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-2">The Intersection</h3>
+                        <p class="text-gray-400">Where QA methodology meets AI innovation. Ensuring AI systems are not just smart, but reliable, tested, and secure.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-24 relative z-10 px-4">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-4xl md:text-5xl font-bold mb-4">Technical Arsenal</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Tools and technologies I use to build robust applications and intelligent AI systems.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                
+                <!-- Category 1: AI & ML -->
+                <div class="glass-card p-8 rounded-3xl">
+                    <div class="flex items-center gap-3 mb-6">
+                        <i class="ph-fill ph-cpu text-2xl text-brand-neon"></i>
+                        <h3 class="text-xl font-semibold">AI, ML & Deep Learning</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="px-4 py-2 rounded-full glass text-sm font-medium hover:bg-brand-neon/20 transition-colors border border-brand-neon/30 text-brand-neon">Scikit-learn</span>
+                        <span class="px-4 py-2 rounded-full glass text-sm font-medium hover:bg-brand-neon/20 transition-colors border border-brand-neon/30 text-brand-neon">PyTorch</span>
+                        <span class="px-4 py-2 rounded-full glass text-sm font-medium hover:bg-brand-purple/20 transition-colors">NLP</span>
+                        <span class="px-4 py-2 rounded-full glass text-sm font-medium hover:bg-brand-purple/20 transition-colors">Transformers</span>
+                        <span class="px-4 py-2 rounded-full glass text-sm font-medium hover:bg-brand-purple/20 transition-colors">Hugging Face</span>
+                    </div>
+                </div>
+
+                <!-- Category 2: Generative AI & Architecture -->
+                <div class="glass-card p-8 rounded-3xl">
+                    <div class="flex items-center gap-3 mb-6">
+                        <i class="ph-fill ph-chat-teardrop-text text-2xl text-brand-accent"></i>
+                        <h3 class="text-xl font-semibold">LLMs & Architecture</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="px-4 py-2 rounded-full glass text-sm font-medium hover:bg-brand-accent/20 transition-colors border border-brand-accent/30 text-brand-accent">LLMs</span>
+                        <span class="px-4 py-2 rounded-full glass text-sm font-medium hover:bg-brand-accent/20 transition-colors border border-brand-accent/30 text-brand-accent">RAG</span>
+                        <span class="px-4 py-2 rounded-full glass text-sm font-medium hover:bg-brand-accent/20 transition-colors">Embeddings</span>
+                        <span class="px-4 py-2 rounded-full glass text-sm font-medium hover:bg-brand-accent/20 transition-colors">Vector Databases</span>
+                        <span class="px-4 py-2 rounded-full glass text-sm font-medium hover:bg-brand-accent/20 transition-colors">AI Agents</span>
+                        <span class="px-4 py-2 rounded-full glass text-sm font-medium hover:bg-brand-accent/20 transition-colors">Tool Calling</span>
+                        <!-- New AI Skills -->
+                        <span class="px-4 py-2 rounded-full border border-white/10 bg-white/5 text-sm text-gray-300 hover:text-brand-neon hover:border-brand-neon transition-all hover:-translate-y-1 cursor-default shadow-lg">LangChain</span>
+                        <span class="px-4 py-2 rounded-full border border-white/10 bg-white/5 text-sm text-gray-300 hover:text-brand-neon hover:border-brand-neon transition-all hover:-translate-y-1 cursor-default shadow-lg">LangGraph</span>
+                        <span class="px-4 py-2 rounded-full border border-white/10 bg-white/5 text-sm text-gray-300 hover:text-brand-neon hover:border-brand-neon transition-all hover:-translate-y-1 cursor-default shadow-lg">Weights & Biases</span>
+                        <span class="px-4 py-2 rounded-full border border-white/10 bg-white/5 text-sm text-gray-300 hover:text-brand-neon hover:border-brand-neon transition-all hover:-translate-y-1 cursor-default shadow-lg">RAGAS</span>
+                        <span class="px-4 py-2 rounded-full border border-white/10 bg-white/5 text-sm text-gray-300 hover:text-brand-neon hover:border-brand-neon transition-all hover:-translate-y-1 cursor-default shadow-lg">Deep Learning</span>
+                    </div>
+                </div>
+
+                <!-- Category 3: Core Programming -->
+                <div class="glass-card p-8 rounded-3xl md:col-span-2 lg:col-span-1">
+                    <div class="flex items-center gap-3 mb-6">
+                        <i class="ph-fill ph-terminal-window text-2xl text-green-400"></i>
+                        <h3 class="text-xl font-semibold">Core Engineering</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="px-4 py-2 rounded-full glass text-sm font-medium hover:bg-white/10 transition-colors border border-white/20">Python</span>
+                        <span class="px-4 py-2 rounded-full glass text-sm font-medium hover:bg-white/10 transition-colors border border-white/20">SQL</span>
+                        <span class="px-4 py-2 rounded-full glass text-sm font-medium hover:bg-white/10 transition-colors border border-white/20">FastAPI</span>
+                        <span class="px-4 py-2 rounded-full glass text-sm font-medium hover:bg-white/10 transition-colors border border-white/20">Git</span>
+                        <span class="px-4 py-2 rounded-full glass text-sm font-medium hover:bg-white/10 transition-colors border border-white/20">Docker</span>
+                        <span class="px-4 py-2 rounded-full glass text-sm font-medium hover:bg-white/10 transition-colors border border-white/20">Kubernetes</span>
+                        <span class="px-4 py-2 rounded-full glass text-sm font-medium hover:bg-white/10 transition-colors border border-white/20">AWS</span>
+                        <span class="px-4 py-2 rounded-full glass text-sm font-medium hover:bg-white/10 transition-colors border border-white/20">SOQL</span>
+                        <span class="px-4 py-2 rounded-full glass text-sm font-medium hover:bg-white/10 transition-colors border border-white/20">Salesforce</span>
+                    </div>
+                </div>
+                
+                <!-- Category 4: QA & Testing (Bonus contextual skill block) -->
+                <div class="glass-card p-8 rounded-3xl md:col-span-2 lg:col-span-1">
+                    <div class="flex items-center gap-3 mb-6">
+                        <i class="ph-fill ph-check-circle text-2xl text-blue-400"></i>
+                        <h3 class="text-xl font-semibold">Quality Assurance</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="px-4 py-2 rounded-full glass text-sm font-medium text-gray-300">Test Automation</span>
+                        <span class="px-4 py-2 rounded-full glass text-sm font-medium text-gray-300">API Testing</span>
+                        <span class="px-4 py-2 rounded-full glass text-sm font-medium text-gray-300">System Reliability</span>
+                        <span class="px-4 py-2 rounded-full glass text-sm font-medium text-gray-300">Performance QA</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-24 relative z-10 px-4 bg-black/40 border-y border-white/5">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="font-display text-4xl md:text-5xl font-bold mb-16 text-center">Professional Experience</h2>
+            
+            <div class="relative pl-8 md:pl-0">
+                <!-- Timeline Line (Desktop only, hidden on mobile for simpler view) -->
+                <div class="hidden md:block absolute left-1/2 transform -translate-x-1/2 h-full w-px bg-gradient-to-b from-brand-neon via-brand-accent to-transparent top-0"></div>
+                
+                <!-- Experience Card -->
+                <div class="relative md:w-1/2 md:pr-12 md:text-right mb-12">
+                    <!-- Timeline Dot -->
+                    <div class="absolute -left-10 md:left-auto md:-right-[21px] top-6 w-10 h-10 rounded-full glass bg-[#0a0a0a] border-2 border-brand-neon flex items-center justify-center z-10 shadow-[0_0_15px_rgba(0,242,254,0.5)]">
+                        <i class="ph-fill ph-briefcase text-brand-neon"></i>
+                    </div>
+                    
+                    <div class="glass-card p-8 rounded-3xl inline-block w-full text-left">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="text-xs font-bold uppercase tracking-wider text-brand-neon bg-brand-neon/10 px-3 py-1 rounded-full">Present</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mt-2">Associate Software Engineer QA</h3>
+                        <h4 class="text-lg text-gray-400 font-medium mb-4 flex items-center gap-2">
+                            <i class="ph-fill ph-building-office text-xl"></i> Zscaler
+                        </h4>
+                        <ul class="text-gray-300 space-y-3 list-none">
+                            <li class="flex items-start gap-2">
+                                <i class="ph-bold ph-check text-brand-neon mt-1 shrink-0"></i>
+                                <span>Ensuring exceptional software quality and reliability across core cloud security products.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="ph-bold ph-check text-brand-neon mt-1 shrink-0"></i>
+                                <span>Developing and maintaining automated test suites using robust frameworks.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="ph-bold ph-check text-brand-neon mt-1 shrink-0"></i>
+                                <span>Currently exploring AI implementations to enhance intelligent test generation and defect analysis.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Internship Card -->
+                <div class="relative md:w-1/2 md:ml-auto md:pl-12 md:text-left mb-12 mt-8 md:mt-0">
+                    <!-- Timeline Dot -->
+                    <div class="absolute -left-10 md:-left-[21px] top-6 w-10 h-10 rounded-full glass bg-[#0a0a0a] border-2 border-brand-accent flex items-center justify-center z-10 shadow-[0_0_15px_rgba(139,92,246,0.5)]">
+                        <i class="ph-fill ph-student text-brand-accent"></i>
+                    </div>
+                    
+                    <div class="glass-card p-8 rounded-3xl inline-block w-full text-left">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="text-xs font-bold uppercase tracking-wider text-brand-accent bg-brand-accent/10 px-3 py-1 rounded-full">Past</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mt-2">Internship (QA)</h3>
+                        <h4 class="text-lg text-gray-400 font-medium mb-4 flex items-center gap-2">
+                            <i class="ph-fill ph-building-office text-xl"></i> Zscaler
+                        </h4>
+                        <ul class="text-gray-300 space-y-3 list-none">
+                            <li class="flex items-start gap-2">
+                                <i class="ph-bold ph-check text-brand-accent mt-1 shrink-0"></i>
+                                <span>Assisted in developing and executing manual and automated test cases for cloud-based security modules.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="ph-bold ph-check text-brand-accent mt-1 shrink-0"></i>
+                                <span>Collaborated with senior QA engineers to identify, document, and track software defects to resolution.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="ph-bold ph-check text-brand-accent mt-1 shrink-0"></i>
+                                <span>Gained foundational experience in agile methodologies, CI/CD pipelines, and Python scripting for testing.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="py-24 relative z-10 px-4">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="font-display text-4xl md:text-5xl font-bold mb-12 text-center">Education</h2>
+            
+            <div class="glass-card p-8 md:p-10 rounded-3xl relative overflow-hidden border border-white/10 group hover:-translate-y-2 transition-transform duration-300">
+                <!-- Decorative background glow -->
+                <div class="absolute -right-20 -top-20 w-64 h-64 bg-brand-purple/10 rounded-full blur-[80px] group-hover:bg-brand-purple/20 transition-all duration-500"></div>
+                
+                <div class="flex flex-col md:flex-row items-start md:items-center gap-8 relative z-10">
+                    <div class="w-20 h-20 rounded-2xl glass bg-[#0a0a0a] border border-white/10 flex items-center justify-center shrink-0 shadow-[0_0_20px_rgba(79,172,254,0.15)] group-hover:shadow-[0_0_20px_rgba(79,172,254,0.3)] transition-all duration-300">
+                        <i class="ph-duotone ph-graduation-cap text-4xl text-brand-purple"></i>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-2xl md:text-3xl font-bold mb-2">Bachelor of Technology</h3>
+                        <h4 class="text-xl text-transparent bg-clip-text bg-gradient-to-r from-brand-neon to-brand-purple font-semibold mb-3">Information Technology</h4>
+                        <p class="text-gray-400 leading-relaxed">
+                            Acquired a comprehensive understanding of software engineering, core IT infrastructure, and algorithms. This academic foundation has been instrumental in mastering rigorous Quality Assurance methodologies and rapidly adapting to advanced Artificial Intelligence architectures.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-24 relative z-10 px-4 bg-black/40 border-t border-white/5">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+                <div>
+                    <h2 class="font-display text-4xl md:text-5xl font-bold mb-4">Featured Projects</h2>
+                    <p class="text-gray-400 max-w-2xl">Exploring the intersection of AI and practical engineering through hands-on development.</p>
+                </div>
+                <a href="https://github.com/suryaprakashrbm-source" class="text-brand-neon hover:text-brand-purple transition-colors flex items-center gap-2 group">
+                    View full GitHub <i class="ph ph-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Project 1 -->
+                <div class="glass-card rounded-3xl overflow-hidden flex flex-col group h-full">
+                    <div class="h-48 w-full bg-gradient-to-br from-gray-800 to-gray-900 relative overflow-hidden flex items-center justify-center">
+                        <!-- Abstract placeholder graphic -->
+                        <div class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-brand-neon via-transparent to-transparent"></div>
+                        <i class="ph-duotone ph-database text-6xl text-brand-neon transform group-hover:scale-110 transition-transform duration-500"></i>
+                    </div>
+                    <div class="p-8 flex flex-col flex-grow">
+                        <div class="flex gap-2 mb-4 flex-wrap">
+                            <span class="text-xs font-semibold px-2 py-1 rounded bg-white/5 border border-white/10 text-brand-neon">RAG</span>
+                            <span class="text-xs font-semibold px-2 py-1 rounded bg-white/5 border border-white/10 text-gray-300">LLMs</span>
+                            <span class="text-xs font-semibold px-2 py-1 rounded bg-white/5 border border-white/10 text-gray-300">Vector DB</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">Enterprise RAG System</h3>
+                        <p class="text-gray-400 text-sm mb-6 flex-grow">An intelligent assistant built utilizing Retrieval-Augmented Generation. Connects to custom document embeddings in a Vector Database to provide highly accurate, context-aware responses.</p>
+                        <a href="#" class="w-full py-3 rounded-xl glass border border-white/10 text-white font-medium text-center hover:bg-white/10 hover:border-brand-neon transition-all flex items-center justify-center gap-2">
+                            <i class="ph-fill ph-github-logo text-lg"></i> View GitHub
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="glass-card rounded-3xl overflow-hidden flex flex-col group h-full">
+                    <div class="h-48 w-full bg-gradient-to-br from-gray-800 to-gray-900 relative overflow-hidden flex items-center justify-center">
+                        <div class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-brand-accent via-transparent to-transparent"></div>
+                        <i class="ph-duotone ph-robot text-6xl text-brand-accent transform group-hover:scale-110 transition-transform duration-500"></i>
+                    </div>
+                    <div class="p-8 flex flex-col flex-grow">
+                        <div class="flex gap-2 mb-4 flex-wrap">
+                            <span class="text-xs font-semibold px-2 py-1 rounded bg-white/5 border border-white/10 text-brand-accent">AI Agents</span>
+                            <span class="text-xs font-semibold px-2 py-1 rounded bg-white/5 border border-white/10 text-gray-300">Tool Calling</span>
+                            <span class="text-xs font-semibold px-2 py-1 rounded bg-white/5 border border-white/10 text-gray-300">Python</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">Autonomous AI Agent</h3>
+                        <p class="text-gray-400 text-sm mb-6 flex-grow">An autonomous agent designed to write, review, and execute test cases. Utilizes LLM tool calling to interact with testing frameworks and report potential bugs directly into tracking systems.</p>
+                        <a href="#" class="w-full py-3 rounded-xl glass border border-white/10 text-white font-medium text-center hover:bg-white/10 hover:border-brand-accent transition-all flex items-center justify-center gap-2">
+                            <i class="ph-fill ph-github-logo text-lg"></i> View GitHub
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="glass-card rounded-3xl overflow-hidden flex flex-col group h-full">
+                    <div class="h-48 w-full bg-gradient-to-br from-gray-800 to-gray-900 relative overflow-hidden flex items-center justify-center">
+                        <div class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-brand-purple via-transparent to-transparent"></div>
+                        <i class="ph-duotone ph-waveform text-6xl text-brand-purple transform group-hover:scale-110 transition-transform duration-500"></i>
+                    </div>
+                    <div class="p-8 flex flex-col flex-grow">
+                        <div class="flex gap-2 mb-4 flex-wrap">
+                            <span class="text-xs font-semibold px-2 py-1 rounded bg-white/5 border border-white/10 text-brand-purple">NLP</span>
+                            <span class="text-xs font-semibold px-2 py-1 rounded bg-white/5 border border-white/10 text-gray-300">Transformers</span>
+                            <span class="text-xs font-semibold px-2 py-1 rounded bg-white/5 border border-white/10 text-gray-300">FastAPI</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">NLP Text Classifier</h3>
+                        <p class="text-gray-400 text-sm mb-6 flex-grow">A sophisticated backend service powered by Hugging Face transformers and FastAPI that parses massive server logs to detect anomalies and classify error patterns using Natural Language Processing.</p>
+                        <a href="#" class="w-full py-3 rounded-xl glass border border-white/10 text-white font-medium text-center hover:bg-white/10 hover:border-brand-purple transition-all flex items-center justify-center gap-2">
+                            <i class="ph-fill ph-github-logo text-lg"></i> View GitHub
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 relative z-10 px-4">
+        <div class="max-w-4xl mx-auto glass-card rounded-[40px] p-8 md:p-16 relative overflow-hidden border border-white/10 shadow-2xl">
+            <!-- Decorative blur orb inside contact card -->
+            <div class="absolute top-[-20%] right-[-10%] w-64 h-64 rounded-full bg-brand-neon/20 blur-[80px] pointer-events-none"></div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 relative z-10">
+                <div>
+                    <h2 class="font-display text-4xl md:text-5xl font-bold mb-4">Let's Connect</h2>
+                    <p class="text-gray-400 mb-8 text-lg">Interested in AI, QA automation, or just want to chat about tech? Drop me a message.</p>
+                    
+                    <div class="space-y-4">
+                        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=suryaprakashrbm@gmail.com" target="_blank" class="flex items-center gap-4 text-gray-300 hover:text-brand-neon transition-colors p-3 rounded-2xl hover:bg-white/5 border border-transparent hover:border-white/10 w-fit">
+                            <div class="w-12 h-12 rounded-full glass flex items-center justify-center text-xl text-brand-neon">
+                                <i class="ph-fill ph-envelope-simple"></i>
+                            </div>
+                            <span class="font-medium">suryaprakashrbm@gmail.com</span>
+                        </a>
+                        <a href="https://www.linkedin.com/in/suryaprakash-b-71421522a/" target="_blank" class="flex items-center gap-4 text-gray-300 hover:text-brand-accent transition-colors p-3 rounded-2xl hover:bg-white/5 border border-transparent hover:border-white/10 w-fit">
+                            <div class="w-12 h-12 rounded-full glass flex items-center justify-center text-xl text-brand-accent">
+                                <i class="ph-fill ph-linkedin-logo"></i>
+                            </div>
+                            <span class="font-medium">LinkedIn Profile</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                <form class="space-y-4" onsubmit="event.preventDefault(); showCustomMessage(event,this);">
+                    <input type="hidden" name="access_key" value="58a5513b-61ce-47b3-a73e-d44d3dce7af6">
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-400 mb-1 ml-2">Name</label>
+                        <!-- ADDED: name="name" -->
+                        <input id="senderName" name="name" type="text" required class="w-full bg-[#0a0a0a]/50 border border-white/10 rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-brand-neon focus:ring-1 focus:ring-brand-neon transition-all" placeholder="John Doe">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-400 mb-1 ml-2">Email</label>
+                        <!-- ADDED: name="email" -->
+                        <input id="senderEmail" name="email" type="email" required class="w-full bg-[#0a0a0a]/50 border border-white/10 rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-brand-neon focus:ring-1 focus:ring-brand-neon transition-all" placeholder="john@example.com">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-400 mb-1 ml-2">Message</label>
+                        <!-- ADDED: name="message" -->
+                        <textarea id="messageText" name="message" rows="4" required class="w-full bg-[#0a0a0a]/50 border border-white/10 rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-brand-neon focus:ring-1 focus:ring-brand-neon transition-all resize-none" placeholder="Let's build something..."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="w-full py-4 rounded-2xl bg-white text-black font-bold text-lg hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all transform hover:-translate-y-1">
+                        Send Message
+                    </button>
+                </form>
+                    
+                    <!-- Custom Message Box for form submission -->
+                    <div id="form-message" class="hidden mt-4 p-4 rounded-xl glass border-brand-neon text-brand-neon text-center text-sm font-medium animate-pulse"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 border-t border-white/10 bg-black/50 text-center text-gray-500 text-sm mt-12 relative z-10">
+        <p>© 2026 AI Portfolio. All rights reserved.</p>
+        <p class="mt-2 text-xs">Designed with <i class="ph-fill ph-heart text-brand-accent"></i> & Tailwind CSS</p>
+    </footer>
+
+    <script>
+        // Custom Message Box (Replaces alert)
+       // Custom Message Box (Replaces alert)
+function showCustomMessage(event, formElement) {
+    // 1. Stop page reload
+    event.preventDefault(); 
+
+    // 2. formElement is passed directly from HTML, no IDs needed!
+    const formData = new FormData(formElement);
+
+    // 3. Send to Web3Forms
+    fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            const msgBox = document.getElementById("form-message");
+            msgBox.innerText = "Message sent successfully! I will get back to you soon.";
+            
+            msgBox.classList.remove("hidden"); 
+            msgBox.classList.add("block");
+            
+            formElement.reset();
+
+            setTimeout(() => {
+                msgBox.classList.add("hidden");
+                msgBox.classList.remove("block");
+            }, 5000);
+        } else {
+            alert("Something went wrong. Please try again.");
+        }
+    })
+    .catch(error => {
+        console.error("Error:", error);
+    });
+}
+
+        // Mobile Menu Toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        const links = document.querySelectorAll('.mobile-link');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when a link is clicked
+        links.forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+            });
+        });
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('py-2', 'backdrop-blur-xl');
+                nav.classList.remove('py-4');
+            } else {
+                nav.classList.add('py-4');
+                nav.classList.remove('py-2', 'backdrop-blur-xl');
+            }
+        });
+
+        // Neural Network Canvas Background Animation
+        const canvas = document.getElementById('neural-canvas');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        let particles = [];
+        
+        function resizeCanvas() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+        
+        window.addEventListener('resize', () => {
+            resizeCanvas();
+            initParticles();
+        });
+        
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * 0.8; // Horizontal velocity
+                this.vy = (Math.random() - 0.5) * 0.8; // Vertical velocity
+                this.radius = Math.random() * 1.5 + 0.5; // Dot size
+            }
+            
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                
+                // Bounce off edges
+                if (this.x < 0 || this.x > width) this.vx = -this.vx;
+                if (this.y < 0 || this.y > height) this.vy = -this.vy;
+            }
+            
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(0, 242, 254, 0.6)'; // Neon blue dots
+                ctx.fill();
+            }
+        }
+        
+        function initParticles() {
+            particles = [];
+            // Dynamically calculate particle count based on screen size so mobile isn't cluttered
+            const numParticles = Math.min(Math.floor((window.innerWidth * window.innerHeight) / 12000), 120);
+            for (let i = 0; i < numParticles; i++) {
+                particles.push(new Particle());
+            }
+        }
+        
+        function animateCanvas() {
+            ctx.clearRect(0, 0, width, height);
+            
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+                
+                // Connect particles if they are close enough
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance < 150) {
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        // Opacity fades as distance increases
+                        const opacity = 1 - (distance / 150);
+                        ctx.strokeStyle = `rgba(139, 92, 246, ${opacity * 0.5})`; // Purple lines
+                        ctx.lineWidth = 0.5;
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animateCanvas);
+        }
+        
+        // Boot up the canvas animation
+        resizeCanvas();
+        initParticles();
+        animateCanvas();
+    </script>
+</body>
+</html>
