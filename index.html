@@ -146,6 +146,27 @@
         .chat-bubble-animate {
             animation: chatBubbleIn 0.25s ease-out forwards;
         }
+
+        /* Ensure links, code, and text never overflow the chat box */
+        #chatbot-messages {
+            overflow-x: hidden;
+            word-break: break-word;
+        }
+
+        #chatbot-messages a {
+            word-break: break-all !important;
+            overflow-wrap: anywhere !important;
+            display: inline;
+        }
+
+        #chatbot-messages p,
+        #chatbot-messages li,
+        #chatbot-messages span,
+        #chatbot-messages div,
+        #chatbot-messages code {
+            overflow-wrap: anywhere !important;
+            word-break: break-word;
+        }
     </style>
 </head>
 
@@ -1146,10 +1167,10 @@
             // Append User Message
             function appendUserMessage(text) {
                 const msgWrapper = document.createElement('div');
-                msgWrapper.className = 'chat-msg user flex items-end justify-end gap-2 chat-bubble-animate';
+                msgWrapper.className = 'chat-msg user flex items-end justify-end gap-2 chat-bubble-animate w-full';
                 msgWrapper.innerHTML = `
-                    <div class="max-w-[82%]">
-                        <div class="bg-gradient-to-r from-brand-accent to-brand-purple text-white px-4 py-2.5 rounded-2xl rounded-tr-sm text-sm shadow-md leading-relaxed break-words font-medium">
+                    <div class="max-w-[85%] min-w-0">
+                        <div class="bg-gradient-to-r from-brand-accent to-brand-purple text-white px-4 py-2.5 rounded-2xl rounded-tr-sm text-sm shadow-md leading-relaxed break-words [overflow-wrap:anywhere] font-medium">
                             ${escapeHTML(text)}
                         </div>
                         <div class="text-[10px] text-gray-400 text-right mt-1 px-1">
@@ -1164,13 +1185,13 @@
             // Append Bot Message
             function appendBotMessage(htmlContent) {
                 const msgWrapper = document.createElement('div');
-                msgWrapper.className = 'chat-msg bot flex items-start gap-2.5 chat-bubble-animate';
+                msgWrapper.className = 'chat-msg bot flex items-start gap-2.5 chat-bubble-animate w-full';
                 msgWrapper.innerHTML = `
                     <div class="w-7 h-7 rounded-full bg-brand-neon/10 border border-brand-neon/30 flex items-center justify-center text-brand-neon shrink-0 mt-0.5 shadow-[0_0_10px_rgba(0,242,254,0.2)]">
                         <i class="ph-fill ph-robot text-sm"></i>
                     </div>
-                    <div class="max-w-[85%] space-y-1">
-                        <div class="bg-white/[0.05] border border-white/10 rounded-2xl rounded-tl-sm p-3.5 text-gray-200 leading-relaxed text-sm shadow-sm">
+                    <div class="max-w-[85%] min-w-0 space-y-1">
+                        <div class="bg-white/[0.05] border border-white/10 rounded-2xl rounded-tl-sm p-3.5 text-gray-200 leading-relaxed text-sm shadow-sm break-words [overflow-wrap:anywhere]">
                             ${htmlContent}
                         </div>
                         <div class="text-[10px] text-gray-400 mt-1 px-1">
@@ -1250,10 +1271,13 @@
                 escaped = escaped.replace(/(^|[^*])\*(?!\*)(.*?)\*/g, '$1<em class="text-gray-300">$2</em>');
 
                 // Inline code: `code`
-                escaped = escaped.replace(/`([^`]+)`/g, '<code class="px-1.5 py-0.5 rounded bg-white/10 text-brand-neon font-mono text-xs">$1</code>');
+                escaped = escaped.replace(/`([^`]+)`/g, '<code class="px-1.5 py-0.5 rounded bg-white/10 text-brand-neon font-mono text-xs break-all">$1</code>');
 
-                // Links: [text](url)
-                escaped = escaped.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-brand-neon underline hover:text-brand-purple transition-colors">$1</a>');
+                // Markdown Links: [text](url)
+                escaped = escaped.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-brand-neon underline hover:text-brand-purple transition-colors break-all [overflow-wrap:anywhere] inline">$1</a>');
+
+                // Raw URLs: (standalone links not already wrapped in href)
+                escaped = escaped.replace(/(^|[^"'>])(https?:\/\/[^\s<)]+)/g, '$1<a href="$2" target="_blank" rel="noopener noreferrer" class="text-brand-neon underline hover:text-brand-purple transition-colors break-all [overflow-wrap:anywhere] inline">$2</a>');
 
                 // Process lines for lists and paragraphs
                 const lines = escaped.split('\n');
@@ -1265,16 +1289,16 @@
                     if (trimmed.startsWith('- ') || trimmed.startsWith('* ')) {
                         if (!inList) {
                             inList = true;
-                            htmlParts.push('<ul class="space-y-1 my-1.5 list-disc list-inside text-gray-300">');
+                            htmlParts.push('<ul class="space-y-1 my-1.5 list-disc list-inside text-gray-300 break-words [overflow-wrap:anywhere]">');
                         }
-                        htmlParts.push(`<li>${trimmed.substring(2)}</li>`);
+                        htmlParts.push(`<li class="break-words [overflow-wrap:anywhere]">${trimmed.substring(2)}</li>`);
                     } else {
                         if (inList) {
                             inList = false;
                             htmlParts.push('</ul>');
                         }
                         if (trimmed) {
-                            htmlParts.push(`<p class="mb-1.5 leading-relaxed">${line}</p>`);
+                            htmlParts.push(`<p class="mb-1.5 leading-relaxed break-words [overflow-wrap:anywhere]">${line}</p>`);
                         }
                     }
                 }
