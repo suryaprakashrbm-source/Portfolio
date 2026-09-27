@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Suryaprakash | AI | Associate SWE QA</title>
-    
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;600;700&display=swap"
+        rel="stylesheet">
+
     <!-- Icons (Phosphor Icons for a clean, tech look) -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -57,7 +60,7 @@
             }
         }
     </script>
-    
+
     <!-- Custom CSS for Glassmorphism & Effects -->
     <style>
         body {
@@ -65,7 +68,7 @@
             color: #ffffff;
             overflow-x: hidden;
         }
-        
+
         /* Glassmorphism utility */
         .glass {
             background: rgba(255, 255, 255, 0.03);
@@ -73,14 +76,14 @@
             -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
-        
+
         .glass-card {
             background: linear-gradient(145deg, rgba(30, 30, 30, 0.6) 0%, rgba(15, 15, 15, 0.8) 100%);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.08);
             transition: all 0.3s ease;
         }
-        
+
         .glass-card:hover {
             border-color: rgba(139, 92, 246, 0.5);
             box-shadow: 0 0 30px rgba(139, 92, 246, 0.15);
@@ -94,17 +97,58 @@
             -webkit-text-fill-color: transparent;
             background-size: 200% auto;
         }
-        
+
         /* Background grid pattern */
         .bg-grid {
             background-size: 40px 40px;
             background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                              linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
             mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
             -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
         }
+
+        /* Chatbot Custom Styles */
+        .chatbot-scroll::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .chatbot-scroll::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .chatbot-scroll::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 9999px;
+        }
+
+        .chatbot-scroll::-webkit-scrollbar-thumb:hover {
+            background: rgba(0, 242, 254, 0.5);
+        }
+
+        #chatbot-window.open {
+            transform: scale(1) translateY(0);
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        @keyframes chatBubbleIn {
+            from {
+                opacity: 0;
+                transform: translateY(8px) scale(0.98);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .chat-bubble-animate {
+            animation: chatBubbleIn 0.25s ease-out forwards;
+        }
     </style>
 </head>
+
 <body class="antialiased relative selection:bg-brand-accent selection:text-white">
 
     <!-- Interactive Canvas Background (Neural Network) -->
@@ -112,20 +156,27 @@
 
     <!-- Ambient Background Blobs -->
     <div class="fixed inset-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
-        <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-brand-purple/20 blur-[120px] mix-blend-screen animate-blob"></div>
-        <div class="absolute top-[20%] right-[-10%] w-[40%] h-[40%] rounded-full bg-brand-accent/20 blur-[120px] mix-blend-screen animate-blob animation-delay-2000"></div>
-        <div class="absolute bottom-[-20%] left-[20%] w-[50%] h-[50%] rounded-full bg-brand-neon/10 blur-[120px] mix-blend-screen animate-blob animation-delay-4000"></div>
+        <div
+            class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-brand-purple/20 blur-[120px] mix-blend-screen animate-blob">
+        </div>
+        <div
+            class="absolute top-[20%] right-[-10%] w-[40%] h-[40%] rounded-full bg-brand-accent/20 blur-[120px] mix-blend-screen animate-blob animation-delay-2000">
+        </div>
+        <div
+            class="absolute bottom-[-20%] left-[20%] w-[50%] h-[50%] rounded-full bg-brand-neon/10 blur-[120px] mix-blend-screen animate-blob animation-delay-4000">
+        </div>
         <div class="absolute inset-0 bg-grid w-full h-full"></div>
     </div>
 
     <!-- Navigation -->
     <nav class="fixed w-full z-50 transition-all duration-300" id="navbar">
-        <div class="glass mx-auto max-w-6xl mt-4 rounded-2xl px-6 py-4 flex justify-between items-center w-[95%] lg:w-full">
+        <div
+            class="glass mx-auto max-w-6xl mt-4 rounded-2xl px-6 py-4 flex justify-between items-center w-[95%] lg:w-full">
             <a href="#" class="font-display font-bold text-xl tracking-wider text-white flex items-center gap-2">
                 <i class="ph-fill ph-code text-brand-neon text-2xl"></i>
                 <span class="hidden sm:block">Suryaprakash<span class="text-brand-accent"></span></span>
             </a>
-            
+
             <!-- Desktop Menu -->
             <div class="hidden md:flex gap-8 text-sm font-medium text-gray-300">
                 <a href="#about" class="hover:text-white hover:text-shadow-sm transition-all">About</a>
@@ -135,8 +186,9 @@
                 <a href="#projects" class="hover:text-white transition-all">Projects</a>
                 <a href="#contact" class="hover:text-white transition-all">Contact</a>
             </div>
-            
-            <a href="#contact" class="hidden md:inline-flex items-center justify-center px-5 py-2 text-sm font-medium text-white bg-white/10 border border-white/20 rounded-full hover:bg-white/20 hover:border-brand-neon transition-all">
+
+            <a href="#contact"
+                class="hidden md:inline-flex items-center justify-center px-5 py-2 text-sm font-medium text-white bg-white/10 border border-white/20 rounded-full hover:bg-white/20 hover:border-brand-neon transition-all">
                 Let's Talk
             </a>
 
@@ -147,7 +199,8 @@
         </div>
 
         <!-- Mobile Menu (Hidden by default) -->
-        <div id="mobile-menu" class="hidden absolute top-20 left-[2.5%] right-[2.5%] glass rounded-2xl p-4 flex flex-col gap-4 shadow-2xl">
+        <div id="mobile-menu"
+            class="hidden absolute top-20 left-[2.5%] right-[2.5%] glass rounded-2xl p-4 flex flex-col gap-4 shadow-2xl">
             <a href="#about" class="mobile-link text-gray-300 hover:text-white p-2">About</a>
             <a href="#skills" class="mobile-link text-gray-300 hover:text-white p-2">Skills</a>
             <a href="#experience" class="mobile-link text-gray-300 hover:text-white p-2">Experience</a>
@@ -160,34 +213,39 @@
     <!-- Hero Section -->
     <section class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden px-4">
         <div class="max-w-4xl mx-auto text-center z-10">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 text-xs sm:text-sm font-medium text-gray-300 mb-8 backdrop-blur-md">
+            <div
+                class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 text-xs sm:text-sm font-medium text-gray-300 mb-8 backdrop-blur-md">
                 <span class="w-2 h-2 rounded-full bg-brand-neon animate-pulse"></span>
                 Hi, I'm Suryaprakassh Balusamy
             </div>
-            
+
             <h1 class="font-display text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-tight mb-6">
                 Bridging QA Excellence with
                 <span class="block text-neon-gradient animate-gradient">Artificial Intelligence</span>
             </h1>
-            
+
             <p class="mt-4 text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed">
-                Associate Software Engineer QA @ <span class="text-white font-semibold">Zscaler</span> | 
+                Associate Software Engineer QA @ <span class="text-white font-semibold">Zscaler</span> |
                 <span class="text-brand-purple">AI Enthusiast</span> building intelligent, robust solutions.
             </p>
-            
+
             <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <a href="#projects" class="group relative px-8 py-3 rounded-full bg-white text-black font-semibold overflow-hidden transition-all hover:scale-105">
-                    <div class="absolute inset-0 w-full h-full bg-gradient-to-r from-brand-neon to-brand-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"></div>
+                <a href="#projects"
+                    class="group relative px-8 py-3 rounded-full bg-white text-black font-semibold overflow-hidden transition-all hover:scale-105">
+                    <div
+                        class="absolute inset-0 w-full h-full bg-gradient-to-r from-brand-neon to-brand-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0">
+                    </div>
                     <span class="relative z-10 group-hover:text-white flex items-center gap-2">
                         View Projects <i class="ph ph-arrow-right"></i>
                     </span>
                 </a>
-                <a href="https://github.com/suryaprakashrbm-source" class="px-8 py-3 rounded-full glass border border-white/20 text-white font-medium hover:bg-white/10 transition-all flex items-center gap-2">
+                <a href="https://github.com/suryaprakashrbm-source"
+                    class="px-8 py-3 rounded-full glass border border-white/20 text-white font-medium hover:bg-white/10 transition-all flex items-center gap-2">
                     <i class="ph ph-github-logo text-xl"></i> GitHub Profile
                 </a>
             </div>
         </div>
-        
+
         <!-- Scroll Indicator -->
         <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center animate-bounce opacity-50">
             <span class="text-xs uppercase tracking-widest text-gray-400 mb-2">Scroll</span>
@@ -202,24 +260,36 @@
                 <div class="space-y-6">
                     <h2 class="font-display text-3xl md:text-5xl font-bold">
                         My Journey <br>
-                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent to-brand-purple">From QA to AI</span>
+                        <span
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent to-brand-purple">From
+                            QA to AI</span>
                     </h2>
                     <p class="text-gray-300 leading-relaxed text-lg">
-                        As an Associate Software Engineer QA at <strong class="text-white">Zscaler</strong>, I've honed my skills in ensuring software reliability, performance, and delivering flawless user experiences. My foundation is built on meticulous testing and automation.
+                        As an Associate Software Engineer QA at <strong class="text-white">Zscaler</strong>, I've honed
+                        my skills in ensuring software reliability, performance, and delivering flawless user
+                        experiences. My foundation is built on meticulous testing and automation.
                     </p>
                     <p class="text-gray-300 leading-relaxed text-lg">
-                        Currently, I am expanding my horizons into the fascinating world of Artificial Intelligence. I am passionate about bridging the gap between rigorous quality assurance and cutting-edge AI technologies. By leveraging LLMs, Machine Learning, and NLP, I aim to build intelligent agents and robust solutions that push the boundaries of what's possible.
+                        Currently, I am expanding my horizons into the fascinating world of Artificial Intelligence. I
+                        am passionate about bridging the gap between rigorous quality assurance and cutting-edge AI
+                        technologies. By leveraging LLMs, Machine Learning, and NLP, I aim to build intelligent agents
+                        and robust solutions that push the boundaries of what's possible.
                     </p>
                 </div>
-                
-                <div class="relative w-full aspect-square md:aspect-auto md:h-[400px] flex items-center justify-center animate-float">
-                    <div class="absolute inset-0 bg-gradient-to-tr from-brand-accent/20 to-brand-neon/20 rounded-3xl blur-2xl"></div>
-                    <div class="glass-card w-full h-full rounded-3xl p-8 flex flex-col justify-center items-center text-center relative z-10 border border-white/10">
+
+                <div
+                    class="relative w-full aspect-square md:aspect-auto md:h-[400px] flex items-center justify-center animate-float">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-tr from-brand-accent/20 to-brand-neon/20 rounded-3xl blur-2xl">
+                    </div>
+                    <div
+                        class="glass-card w-full h-full rounded-3xl p-8 flex flex-col justify-center items-center text-center relative z-10 border border-white/10">
                         <div class="w-24 h-24 rounded-full glass flex items-center justify-center mb-6">
                             <i class="ph-duotone ph-brain text-5xl text-brand-neon"></i>
                         </div>
                         <h3 class="text-2xl font-bold mb-2">The Intersection</h3>
-                        <p class="text-gray-400">Where QA methodology meets AI innovation. Ensuring AI systems are not just smart, but reliable, tested, and secure.</p>
+                        <p class="text-gray-400">Where QA methodology meets AI innovation. Ensuring AI systems are not
+                            just smart, but reliable, tested, and secure.</p>
                     </div>
                 </div>
             </div>
@@ -231,11 +301,12 @@
         <div class="max-w-6xl mx-auto">
             <div class="text-center mb-16">
                 <h2 class="font-display text-4xl md:text-5xl font-bold mb-4">Technical Arsenal</h2>
-                <p class="text-gray-400 max-w-2xl mx-auto">Tools and technologies I use to build robust applications and intelligent AI systems.</p>
+                <p class="text-gray-400 max-w-2xl mx-auto">Tools and technologies I use to build robust applications and
+                    intelligent AI systems.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                
+
                 <!-- Category 1: AI & ML -->
                 <div class="glass-card p-8 rounded-3xl">
                     <div class="flex items-center gap-3 mb-6">
@@ -243,11 +314,17 @@
                         <h3 class="text-xl font-semibold">AI, ML & Deep Learning</h3>
                     </div>
                     <div class="flex flex-wrap gap-3">
-                        <span class="px-4 py-2 rounded-full glass text-sm font-medium hover:bg-brand-neon/20 transition-colors border border-brand-neon/30 text-brand-neon">Scikit-learn</span>
-                        <span class="px-4 py-2 rounded-full glass text-sm font-medium hover:bg-brand-neon/20 transition-colors border border-brand-neon/30 text-brand-neon">PyTorch</span>
-                        <span class="px-4 py-2 rounded-full glass text-sm font-medium hover:bg-brand-purple/20 transition-colors">NLP</span>
-                        <span class="px-4 py-2 rounded-full glass text-sm font-medium hover:bg-brand-purple/20 transition-colors">Transformers</span>
-                        <span class="px-4 py-2 rounded-full glass text-sm font-medium hover:bg-brand-purple/20 transition-colors">Hugging Face</span>
+                        <span
+                            class="px-4 py-2 rounded-full glass text-sm font-medium hover:bg-brand-neon/20 transition-colors border border-brand-neon/30 text-brand-neon">Scikit-learn</span>
+                        <span
+                            class="px-4 py-2 rounded-full glass text-sm font-medium hover:bg-brand-neon/20 transition-colors border border-brand-neon/30 text-brand-neon">PyTorch</span>
+                        <span
+                            class="px-4 py-2 rounded-full glass text-sm font-medium hover:bg-brand-purple/20 transition-colors">NLP</span>
+                        <span
+                            class="px-4 py-2 rounded-full glass text-sm font-medium hover:bg-brand-purple/20 transition-colors">Transformers</span>
+                        <span
+                            class="px-4 py-2 rounded-full glass text-sm font-medium hover:bg-brand-purple/20 transition-colors">Hugging
+                            Face</span>
                     </div>
                 </div>
 
@@ -258,18 +335,34 @@
                         <h3 class="text-xl font-semibold">LLMs & Architecture</h3>
                     </div>
                     <div class="flex flex-wrap gap-3">
-                        <span class="px-4 py-2 rounded-full glass text-sm font-medium hover:bg-brand-accent/20 transition-colors border border-brand-accent/30 text-brand-accent">LLMs</span>
-                        <span class="px-4 py-2 rounded-full glass text-sm font-medium hover:bg-brand-accent/20 transition-colors border border-brand-accent/30 text-brand-accent">RAG</span>
-                        <span class="px-4 py-2 rounded-full glass text-sm font-medium hover:bg-brand-accent/20 transition-colors">Embeddings</span>
-                        <span class="px-4 py-2 rounded-full glass text-sm font-medium hover:bg-brand-accent/20 transition-colors">Vector Databases</span>
-                        <span class="px-4 py-2 rounded-full glass text-sm font-medium hover:bg-brand-accent/20 transition-colors">AI Agents</span>
-                        <span class="px-4 py-2 rounded-full glass text-sm font-medium hover:bg-brand-accent/20 transition-colors">Tool Calling</span>
+                        <span
+                            class="px-4 py-2 rounded-full glass text-sm font-medium hover:bg-brand-accent/20 transition-colors border border-brand-accent/30 text-brand-accent">LLMs</span>
+                        <span
+                            class="px-4 py-2 rounded-full glass text-sm font-medium hover:bg-brand-accent/20 transition-colors border border-brand-accent/30 text-brand-accent">RAG</span>
+                        <span
+                            class="px-4 py-2 rounded-full glass text-sm font-medium hover:bg-brand-accent/20 transition-colors">Embeddings</span>
+                        <span
+                            class="px-4 py-2 rounded-full glass text-sm font-medium hover:bg-brand-accent/20 transition-colors">Vector
+                            Databases</span>
+                        <span
+                            class="px-4 py-2 rounded-full glass text-sm font-medium hover:bg-brand-accent/20 transition-colors">AI
+                            Agents</span>
+                        <span
+                            class="px-4 py-2 rounded-full glass text-sm font-medium hover:bg-brand-accent/20 transition-colors">Tool
+                            Calling</span>
                         <!-- New AI Skills -->
-                        <span class="px-4 py-2 rounded-full border border-white/10 bg-white/5 text-sm text-gray-300 hover:text-brand-neon hover:border-brand-neon transition-all hover:-translate-y-1 cursor-default shadow-lg">LangChain</span>
-                        <span class="px-4 py-2 rounded-full border border-white/10 bg-white/5 text-sm text-gray-300 hover:text-brand-neon hover:border-brand-neon transition-all hover:-translate-y-1 cursor-default shadow-lg">LangGraph</span>
-                        <span class="px-4 py-2 rounded-full border border-white/10 bg-white/5 text-sm text-gray-300 hover:text-brand-neon hover:border-brand-neon transition-all hover:-translate-y-1 cursor-default shadow-lg">Weights & Biases</span>
-                        <span class="px-4 py-2 rounded-full border border-white/10 bg-white/5 text-sm text-gray-300 hover:text-brand-neon hover:border-brand-neon transition-all hover:-translate-y-1 cursor-default shadow-lg">RAGAS</span>
-                        <span class="px-4 py-2 rounded-full border border-white/10 bg-white/5 text-sm text-gray-300 hover:text-brand-neon hover:border-brand-neon transition-all hover:-translate-y-1 cursor-default shadow-lg">Deep Learning</span>
+                        <span
+                            class="px-4 py-2 rounded-full border border-white/10 bg-white/5 text-sm text-gray-300 hover:text-brand-neon hover:border-brand-neon transition-all hover:-translate-y-1 cursor-default shadow-lg">LangChain</span>
+                        <span
+                            class="px-4 py-2 rounded-full border border-white/10 bg-white/5 text-sm text-gray-300 hover:text-brand-neon hover:border-brand-neon transition-all hover:-translate-y-1 cursor-default shadow-lg">LangGraph</span>
+                        <span
+                            class="px-4 py-2 rounded-full border border-white/10 bg-white/5 text-sm text-gray-300 hover:text-brand-neon hover:border-brand-neon transition-all hover:-translate-y-1 cursor-default shadow-lg">Weights
+                            & Biases</span>
+                        <span
+                            class="px-4 py-2 rounded-full border border-white/10 bg-white/5 text-sm text-gray-300 hover:text-brand-neon hover:border-brand-neon transition-all hover:-translate-y-1 cursor-default shadow-lg">RAGAS</span>
+                        <span
+                            class="px-4 py-2 rounded-full border border-white/10 bg-white/5 text-sm text-gray-300 hover:text-brand-neon hover:border-brand-neon transition-all hover:-translate-y-1 cursor-default shadow-lg">Deep
+                            Learning</span>
                     </div>
                 </div>
 
@@ -280,18 +373,27 @@
                         <h3 class="text-xl font-semibold">Core Engineering</h3>
                     </div>
                     <div class="flex flex-wrap gap-3">
-                        <span class="px-4 py-2 rounded-full glass text-sm font-medium hover:bg-white/10 transition-colors border border-white/20">Python</span>
-                        <span class="px-4 py-2 rounded-full glass text-sm font-medium hover:bg-white/10 transition-colors border border-white/20">SQL</span>
-                        <span class="px-4 py-2 rounded-full glass text-sm font-medium hover:bg-white/10 transition-colors border border-white/20">FastAPI</span>
-                        <span class="px-4 py-2 rounded-full glass text-sm font-medium hover:bg-white/10 transition-colors border border-white/20">Git</span>
-                        <span class="px-4 py-2 rounded-full glass text-sm font-medium hover:bg-white/10 transition-colors border border-white/20">Docker</span>
-                        <span class="px-4 py-2 rounded-full glass text-sm font-medium hover:bg-white/10 transition-colors border border-white/20">Kubernetes</span>
-                        <span class="px-4 py-2 rounded-full glass text-sm font-medium hover:bg-white/10 transition-colors border border-white/20">AWS</span>
-                        <span class="px-4 py-2 rounded-full glass text-sm font-medium hover:bg-white/10 transition-colors border border-white/20">SOQL</span>
-                        <span class="px-4 py-2 rounded-full glass text-sm font-medium hover:bg-white/10 transition-colors border border-white/20">Salesforce</span>
+                        <span
+                            class="px-4 py-2 rounded-full glass text-sm font-medium hover:bg-white/10 transition-colors border border-white/20">Python</span>
+                        <span
+                            class="px-4 py-2 rounded-full glass text-sm font-medium hover:bg-white/10 transition-colors border border-white/20">SQL</span>
+                        <span
+                            class="px-4 py-2 rounded-full glass text-sm font-medium hover:bg-white/10 transition-colors border border-white/20">FastAPI</span>
+                        <span
+                            class="px-4 py-2 rounded-full glass text-sm font-medium hover:bg-white/10 transition-colors border border-white/20">Git</span>
+                        <span
+                            class="px-4 py-2 rounded-full glass text-sm font-medium hover:bg-white/10 transition-colors border border-white/20">Docker</span>
+                        <span
+                            class="px-4 py-2 rounded-full glass text-sm font-medium hover:bg-white/10 transition-colors border border-white/20">Kubernetes</span>
+                        <span
+                            class="px-4 py-2 rounded-full glass text-sm font-medium hover:bg-white/10 transition-colors border border-white/20">AWS</span>
+                        <span
+                            class="px-4 py-2 rounded-full glass text-sm font-medium hover:bg-white/10 transition-colors border border-white/20">SOQL</span>
+                        <span
+                            class="px-4 py-2 rounded-full glass text-sm font-medium hover:bg-white/10 transition-colors border border-white/20">Salesforce</span>
                     </div>
                 </div>
-                
+
                 <!-- Category 4: QA & Testing (Bonus contextual skill block) -->
                 <div class="glass-card p-8 rounded-3xl md:col-span-2 lg:col-span-1">
                     <div class="flex items-center gap-3 mb-6">
@@ -299,10 +401,13 @@
                         <h3 class="text-xl font-semibold">Quality Assurance</h3>
                     </div>
                     <div class="flex flex-wrap gap-3">
-                        <span class="px-4 py-2 rounded-full glass text-sm font-medium text-gray-300">Test Automation</span>
+                        <span class="px-4 py-2 rounded-full glass text-sm font-medium text-gray-300">Test
+                            Automation</span>
                         <span class="px-4 py-2 rounded-full glass text-sm font-medium text-gray-300">API Testing</span>
-                        <span class="px-4 py-2 rounded-full glass text-sm font-medium text-gray-300">System Reliability</span>
-                        <span class="px-4 py-2 rounded-full glass text-sm font-medium text-gray-300">Performance QA</span>
+                        <span class="px-4 py-2 rounded-full glass text-sm font-medium text-gray-300">System
+                            Reliability</span>
+                        <span class="px-4 py-2 rounded-full glass text-sm font-medium text-gray-300">Performance
+                            QA</span>
                     </div>
                 </div>
 
@@ -314,21 +419,25 @@
     <section id="experience" class="py-24 relative z-10 px-4 bg-black/40 border-y border-white/5">
         <div class="max-w-4xl mx-auto">
             <h2 class="font-display text-4xl md:text-5xl font-bold mb-16 text-center">Professional Experience</h2>
-            
+
             <div class="relative pl-8 md:pl-0">
                 <!-- Timeline Line (Desktop only, hidden on mobile for simpler view) -->
-                <div class="hidden md:block absolute left-1/2 transform -translate-x-1/2 h-full w-px bg-gradient-to-b from-brand-neon via-brand-accent to-transparent top-0"></div>
-                
+                <div
+                    class="hidden md:block absolute left-1/2 transform -translate-x-1/2 h-full w-px bg-gradient-to-b from-brand-neon via-brand-accent to-transparent top-0">
+                </div>
+
                 <!-- Experience Card -->
                 <div class="relative md:w-1/2 md:pr-12 md:text-right mb-12">
                     <!-- Timeline Dot -->
-                    <div class="absolute -left-10 md:left-auto md:-right-[21px] top-6 w-10 h-10 rounded-full glass bg-[#0a0a0a] border-2 border-brand-neon flex items-center justify-center z-10 shadow-[0_0_15px_rgba(0,242,254,0.5)]">
+                    <div
+                        class="absolute -left-10 md:left-auto md:-right-[21px] top-6 w-10 h-10 rounded-full glass bg-[#0a0a0a] border-2 border-brand-neon flex items-center justify-center z-10 shadow-[0_0_15px_rgba(0,242,254,0.5)]">
                         <i class="ph-fill ph-briefcase text-brand-neon"></i>
                     </div>
-                    
+
                     <div class="glass-card p-8 rounded-3xl inline-block w-full text-left">
                         <div class="flex items-center gap-3 mb-2">
-                            <span class="text-xs font-bold uppercase tracking-wider text-brand-neon bg-brand-neon/10 px-3 py-1 rounded-full">Present</span>
+                            <span
+                                class="text-xs font-bold uppercase tracking-wider text-brand-neon bg-brand-neon/10 px-3 py-1 rounded-full">Present</span>
                         </div>
                         <h3 class="text-2xl font-bold mt-2">Associate Software Engineer QA</h3>
                         <h4 class="text-lg text-gray-400 font-medium mb-4 flex items-center gap-2">
@@ -337,7 +446,8 @@
                         <ul class="text-gray-300 space-y-3 list-none">
                             <li class="flex items-start gap-2">
                                 <i class="ph-bold ph-check text-brand-neon mt-1 shrink-0"></i>
-                                <span>Ensuring exceptional software quality and reliability across core cloud security products.</span>
+                                <span>Ensuring exceptional software quality and reliability across core cloud security
+                                    products.</span>
                             </li>
                             <li class="flex items-start gap-2">
                                 <i class="ph-bold ph-check text-brand-neon mt-1 shrink-0"></i>
@@ -345,7 +455,8 @@
                             </li>
                             <li class="flex items-start gap-2">
                                 <i class="ph-bold ph-check text-brand-neon mt-1 shrink-0"></i>
-                                <span>Currently exploring AI implementations to enhance intelligent test generation and defect analysis.</span>
+                                <span>Currently exploring AI implementations to enhance intelligent test generation and
+                                    defect analysis.</span>
                             </li>
                         </ul>
                     </div>
@@ -354,13 +465,15 @@
                 <!-- Internship Card -->
                 <div class="relative md:w-1/2 md:ml-auto md:pl-12 md:text-left mb-12 mt-8 md:mt-0">
                     <!-- Timeline Dot -->
-                    <div class="absolute -left-10 md:-left-[21px] top-6 w-10 h-10 rounded-full glass bg-[#0a0a0a] border-2 border-brand-accent flex items-center justify-center z-10 shadow-[0_0_15px_rgba(139,92,246,0.5)]">
+                    <div
+                        class="absolute -left-10 md:-left-[21px] top-6 w-10 h-10 rounded-full glass bg-[#0a0a0a] border-2 border-brand-accent flex items-center justify-center z-10 shadow-[0_0_15px_rgba(139,92,246,0.5)]">
                         <i class="ph-fill ph-student text-brand-accent"></i>
                     </div>
-                    
+
                     <div class="glass-card p-8 rounded-3xl inline-block w-full text-left">
                         <div class="flex items-center gap-3 mb-2">
-                            <span class="text-xs font-bold uppercase tracking-wider text-brand-accent bg-brand-accent/10 px-3 py-1 rounded-full">Past</span>
+                            <span
+                                class="text-xs font-bold uppercase tracking-wider text-brand-accent bg-brand-accent/10 px-3 py-1 rounded-full">Past</span>
                         </div>
                         <h3 class="text-2xl font-bold mt-2">Internship (QA)</h3>
                         <h4 class="text-lg text-gray-400 font-medium mb-4 flex items-center gap-2">
@@ -369,15 +482,18 @@
                         <ul class="text-gray-300 space-y-3 list-none">
                             <li class="flex items-start gap-2">
                                 <i class="ph-bold ph-check text-brand-accent mt-1 shrink-0"></i>
-                                <span>Assisted in developing and executing manual and automated test cases for cloud-based security modules.</span>
+                                <span>Assisted in developing and executing manual and automated test cases for
+                                    cloud-based security modules.</span>
                             </li>
                             <li class="flex items-start gap-2">
                                 <i class="ph-bold ph-check text-brand-accent mt-1 shrink-0"></i>
-                                <span>Collaborated with senior QA engineers to identify, document, and track software defects to resolution.</span>
+                                <span>Collaborated with senior QA engineers to identify, document, and track software
+                                    defects to resolution.</span>
                             </li>
                             <li class="flex items-start gap-2">
                                 <i class="ph-bold ph-check text-brand-accent mt-1 shrink-0"></i>
-                                <span>Gained foundational experience in agile methodologies, CI/CD pipelines, and Python scripting for testing.</span>
+                                <span>Gained foundational experience in agile methodologies, CI/CD pipelines, and Python
+                                    scripting for testing.</span>
                             </li>
                         </ul>
                     </div>
@@ -390,21 +506,30 @@
     <section id="education" class="py-24 relative z-10 px-4">
         <div class="max-w-4xl mx-auto">
             <h2 class="font-display text-4xl md:text-5xl font-bold mb-12 text-center">Education</h2>
-            
-            <div class="glass-card p-8 md:p-10 rounded-3xl relative overflow-hidden border border-white/10 group hover:-translate-y-2 transition-transform duration-300">
+
+            <div
+                class="glass-card p-8 md:p-10 rounded-3xl relative overflow-hidden border border-white/10 group hover:-translate-y-2 transition-transform duration-300">
                 <!-- Decorative background glow -->
-                <div class="absolute -right-20 -top-20 w-64 h-64 bg-brand-purple/10 rounded-full blur-[80px] group-hover:bg-brand-purple/20 transition-all duration-500"></div>
-                
+                <div
+                    class="absolute -right-20 -top-20 w-64 h-64 bg-brand-purple/10 rounded-full blur-[80px] group-hover:bg-brand-purple/20 transition-all duration-500">
+                </div>
+
                 <div class="flex flex-col md:flex-row items-start md:items-center gap-8 relative z-10">
-                    <div class="w-20 h-20 rounded-2xl glass bg-[#0a0a0a] border border-white/10 flex items-center justify-center shrink-0 shadow-[0_0_20px_rgba(79,172,254,0.15)] group-hover:shadow-[0_0_20px_rgba(79,172,254,0.3)] transition-all duration-300">
+                    <div
+                        class="w-20 h-20 rounded-2xl glass bg-[#0a0a0a] border border-white/10 flex items-center justify-center shrink-0 shadow-[0_0_20px_rgba(79,172,254,0.15)] group-hover:shadow-[0_0_20px_rgba(79,172,254,0.3)] transition-all duration-300">
                         <i class="ph-duotone ph-graduation-cap text-4xl text-brand-purple"></i>
                     </div>
-                    
+
                     <div>
                         <h3 class="text-2xl md:text-3xl font-bold mb-2">Bachelor of Technology</h3>
-                        <h4 class="text-xl text-transparent bg-clip-text bg-gradient-to-r from-brand-neon to-brand-purple font-semibold mb-3">Information Technology</h4>
+                        <h4
+                            class="text-xl text-transparent bg-clip-text bg-gradient-to-r from-brand-neon to-brand-purple font-semibold mb-3">
+                            Information Technology</h4>
                         <p class="text-gray-400 leading-relaxed">
-                            Acquired a comprehensive understanding of software engineering, core IT infrastructure, and algorithms. This academic foundation has been instrumental in mastering rigorous Quality Assurance methodologies and rapidly adapting to advanced Artificial Intelligence architectures.
+                            Acquired a comprehensive understanding of software engineering, core IT infrastructure, and
+                            algorithms. This academic foundation has been instrumental in mastering rigorous Quality
+                            Assurance methodologies and rapidly adapting to advanced Artificial Intelligence
+                            architectures.
                         </p>
                     </div>
                 </div>
@@ -418,31 +543,44 @@
             <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
                 <div>
                     <h2 class="font-display text-4xl md:text-5xl font-bold mb-4">Featured Projects</h2>
-                    <p class="text-gray-400 max-w-2xl">Exploring the intersection of AI and practical engineering through hands-on development.</p>
+                    <p class="text-gray-400 max-w-2xl">Exploring the intersection of AI and practical engineering
+                        through hands-on development.</p>
                 </div>
-                <a href="https://github.com/suryaprakashrbm-source" class="text-brand-neon hover:text-brand-purple transition-colors flex items-center gap-2 group">
+                <a href="https://github.com/suryaprakashrbm-source"
+                    class="text-brand-neon hover:text-brand-purple transition-colors flex items-center gap-2 group">
                     View full GitHub <i class="ph ph-arrow-right group-hover:translate-x-1 transition-transform"></i>
                 </a>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                
+
                 <!-- Project 1 -->
                 <div class="glass-card rounded-3xl overflow-hidden flex flex-col group h-full">
-                    <div class="h-48 w-full bg-gradient-to-br from-gray-800 to-gray-900 relative overflow-hidden flex items-center justify-center">
+                    <div
+                        class="h-48 w-full bg-gradient-to-br from-gray-800 to-gray-900 relative overflow-hidden flex items-center justify-center">
                         <!-- Abstract placeholder graphic -->
-                        <div class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-brand-neon via-transparent to-transparent"></div>
-                        <i class="ph-duotone ph-database text-6xl text-brand-neon transform group-hover:scale-110 transition-transform duration-500"></i>
+                        <div
+                            class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-brand-neon via-transparent to-transparent">
+                        </div>
+                        <i
+                            class="ph-duotone ph-database text-6xl text-brand-neon transform group-hover:scale-110 transition-transform duration-500"></i>
                     </div>
                     <div class="p-8 flex flex-col flex-grow">
                         <div class="flex gap-2 mb-4 flex-wrap">
-                            <span class="text-xs font-semibold px-2 py-1 rounded bg-white/5 border border-white/10 text-brand-neon">RAG</span>
-                            <span class="text-xs font-semibold px-2 py-1 rounded bg-white/5 border border-white/10 text-gray-300">LLMs</span>
-                            <span class="text-xs font-semibold px-2 py-1 rounded bg-white/5 border border-white/10 text-gray-300">Vector DB</span>
+                            <span
+                                class="text-xs font-semibold px-2 py-1 rounded bg-white/5 border border-white/10 text-brand-neon">RAG</span>
+                            <span
+                                class="text-xs font-semibold px-2 py-1 rounded bg-white/5 border border-white/10 text-gray-300">LLMs</span>
+                            <span
+                                class="text-xs font-semibold px-2 py-1 rounded bg-white/5 border border-white/10 text-gray-300">Vector
+                                DB</span>
                         </div>
                         <h3 class="text-xl font-bold mb-3">Enterprise RAG System</h3>
-                        <p class="text-gray-400 text-sm mb-6 flex-grow">An intelligent assistant built utilizing Retrieval-Augmented Generation. Connects to custom document embeddings in a Vector Database to provide highly accurate, context-aware responses.</p>
-                        <a href="#" class="w-full py-3 rounded-xl glass border border-white/10 text-white font-medium text-center hover:bg-white/10 hover:border-brand-neon transition-all flex items-center justify-center gap-2">
+                        <p class="text-gray-400 text-sm mb-6 flex-grow">An intelligent assistant built utilizing
+                            Retrieval-Augmented Generation. Connects to custom document embeddings in a Vector Database
+                            to provide highly accurate, context-aware responses.</p>
+                        <a href="#"
+                            class="w-full py-3 rounded-xl glass border border-white/10 text-white font-medium text-center hover:bg-white/10 hover:border-brand-neon transition-all flex items-center justify-center gap-2">
                             <i class="ph-fill ph-github-logo text-lg"></i> View GitHub
                         </a>
                     </div>
@@ -450,19 +588,31 @@
 
                 <!-- Project 2 -->
                 <div class="glass-card rounded-3xl overflow-hidden flex flex-col group h-full">
-                    <div class="h-48 w-full bg-gradient-to-br from-gray-800 to-gray-900 relative overflow-hidden flex items-center justify-center">
-                        <div class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-brand-accent via-transparent to-transparent"></div>
-                        <i class="ph-duotone ph-robot text-6xl text-brand-accent transform group-hover:scale-110 transition-transform duration-500"></i>
+                    <div
+                        class="h-48 w-full bg-gradient-to-br from-gray-800 to-gray-900 relative overflow-hidden flex items-center justify-center">
+                        <div
+                            class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-brand-accent via-transparent to-transparent">
+                        </div>
+                        <i
+                            class="ph-duotone ph-robot text-6xl text-brand-accent transform group-hover:scale-110 transition-transform duration-500"></i>
                     </div>
                     <div class="p-8 flex flex-col flex-grow">
                         <div class="flex gap-2 mb-4 flex-wrap">
-                            <span class="text-xs font-semibold px-2 py-1 rounded bg-white/5 border border-white/10 text-brand-accent">AI Agents</span>
-                            <span class="text-xs font-semibold px-2 py-1 rounded bg-white/5 border border-white/10 text-gray-300">Tool Calling</span>
-                            <span class="text-xs font-semibold px-2 py-1 rounded bg-white/5 border border-white/10 text-gray-300">Python</span>
+                            <span
+                                class="text-xs font-semibold px-2 py-1 rounded bg-white/5 border border-white/10 text-brand-accent">AI
+                                Agents</span>
+                            <span
+                                class="text-xs font-semibold px-2 py-1 rounded bg-white/5 border border-white/10 text-gray-300">Tool
+                                Calling</span>
+                            <span
+                                class="text-xs font-semibold px-2 py-1 rounded bg-white/5 border border-white/10 text-gray-300">Python</span>
                         </div>
                         <h3 class="text-xl font-bold mb-3">Autonomous AI Agent</h3>
-                        <p class="text-gray-400 text-sm mb-6 flex-grow">An autonomous agent designed to write, review, and execute test cases. Utilizes LLM tool calling to interact with testing frameworks and report potential bugs directly into tracking systems.</p>
-                        <a href="#" class="w-full py-3 rounded-xl glass border border-white/10 text-white font-medium text-center hover:bg-white/10 hover:border-brand-accent transition-all flex items-center justify-center gap-2">
+                        <p class="text-gray-400 text-sm mb-6 flex-grow">An autonomous agent designed to write, review,
+                            and execute test cases. Utilizes LLM tool calling to interact with testing frameworks and
+                            report potential bugs directly into tracking systems.</p>
+                        <a href="#"
+                            class="w-full py-3 rounded-xl glass border border-white/10 text-white font-medium text-center hover:bg-white/10 hover:border-brand-accent transition-all flex items-center justify-center gap-2">
                             <i class="ph-fill ph-github-logo text-lg"></i> View GitHub
                         </a>
                     </div>
@@ -470,19 +620,29 @@
 
                 <!-- Project 3 -->
                 <div class="glass-card rounded-3xl overflow-hidden flex flex-col group h-full">
-                    <div class="h-48 w-full bg-gradient-to-br from-gray-800 to-gray-900 relative overflow-hidden flex items-center justify-center">
-                        <div class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-brand-purple via-transparent to-transparent"></div>
-                        <i class="ph-duotone ph-waveform text-6xl text-brand-purple transform group-hover:scale-110 transition-transform duration-500"></i>
+                    <div
+                        class="h-48 w-full bg-gradient-to-br from-gray-800 to-gray-900 relative overflow-hidden flex items-center justify-center">
+                        <div
+                            class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-brand-purple via-transparent to-transparent">
+                        </div>
+                        <i
+                            class="ph-duotone ph-waveform text-6xl text-brand-purple transform group-hover:scale-110 transition-transform duration-500"></i>
                     </div>
                     <div class="p-8 flex flex-col flex-grow">
                         <div class="flex gap-2 mb-4 flex-wrap">
-                            <span class="text-xs font-semibold px-2 py-1 rounded bg-white/5 border border-white/10 text-brand-purple">NLP</span>
-                            <span class="text-xs font-semibold px-2 py-1 rounded bg-white/5 border border-white/10 text-gray-300">Transformers</span>
-                            <span class="text-xs font-semibold px-2 py-1 rounded bg-white/5 border border-white/10 text-gray-300">FastAPI</span>
+                            <span
+                                class="text-xs font-semibold px-2 py-1 rounded bg-white/5 border border-white/10 text-brand-purple">NLP</span>
+                            <span
+                                class="text-xs font-semibold px-2 py-1 rounded bg-white/5 border border-white/10 text-gray-300">Transformers</span>
+                            <span
+                                class="text-xs font-semibold px-2 py-1 rounded bg-white/5 border border-white/10 text-gray-300">FastAPI</span>
                         </div>
                         <h3 class="text-xl font-bold mb-3">NLP Text Classifier</h3>
-                        <p class="text-gray-400 text-sm mb-6 flex-grow">A sophisticated backend service powered by Hugging Face transformers and FastAPI that parses massive server logs to detect anomalies and classify error patterns using Natural Language Processing.</p>
-                        <a href="#" class="w-full py-3 rounded-xl glass border border-white/10 text-white font-medium text-center hover:bg-white/10 hover:border-brand-purple transition-all flex items-center justify-center gap-2">
+                        <p class="text-gray-400 text-sm mb-6 flex-grow">A sophisticated backend service powered by
+                            Hugging Face transformers and FastAPI that parses massive server logs to detect anomalies
+                            and classify error patterns using Natural Language Processing.</p>
+                        <a href="#"
+                            class="w-full py-3 rounded-xl glass border border-white/10 text-white font-medium text-center hover:bg-white/10 hover:border-brand-purple transition-all flex items-center justify-center gap-2">
                             <i class="ph-fill ph-github-logo text-lg"></i> View GitHub
                         </a>
                     </div>
@@ -494,64 +654,249 @@
 
     <!-- Contact Section -->
     <section id="contact" class="py-24 relative z-10 px-4">
-        <div class="max-w-4xl mx-auto glass-card rounded-[40px] p-8 md:p-16 relative overflow-hidden border border-white/10 shadow-2xl">
+        <div
+            class="max-w-4xl mx-auto glass-card rounded-[40px] p-8 md:p-16 relative overflow-hidden border border-white/10 shadow-2xl">
             <!-- Decorative blur orb inside contact card -->
-            <div class="absolute top-[-20%] right-[-10%] w-64 h-64 rounded-full bg-brand-neon/20 blur-[80px] pointer-events-none"></div>
-            
+            <div
+                class="absolute top-[-20%] right-[-10%] w-64 h-64 rounded-full bg-brand-neon/20 blur-[80px] pointer-events-none">
+            </div>
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12 relative z-10">
                 <div>
                     <h2 class="font-display text-4xl md:text-5xl font-bold mb-4">Let's Connect</h2>
-                    <p class="text-gray-400 mb-8 text-lg">Interested in AI, QA automation, or just want to chat about tech? Drop me a message.</p>
-                    
+                    <p class="text-gray-400 mb-8 text-lg">Interested in AI, QA automation, or just want to chat about
+                        tech? Drop me a message.</p>
+
                     <div class="space-y-4">
-                        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=suryaprakashrbm@gmail.com" target="_blank" class="flex items-center gap-4 text-gray-300 hover:text-brand-neon transition-colors p-3 rounded-2xl hover:bg-white/5 border border-transparent hover:border-white/10 w-fit">
-                            <div class="w-12 h-12 rounded-full glass flex items-center justify-center text-xl text-brand-neon">
+                        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=suryaprakashrbm@gmail.com"
+                            target="_blank"
+                            class="flex items-center gap-4 text-gray-300 hover:text-brand-neon transition-colors p-3 rounded-2xl hover:bg-white/5 border border-transparent hover:border-white/10 w-fit">
+                            <div
+                                class="w-12 h-12 rounded-full glass flex items-center justify-center text-xl text-brand-neon">
                                 <i class="ph-fill ph-envelope-simple"></i>
                             </div>
                             <span class="font-medium">suryaprakashrbm@gmail.com</span>
                         </a>
-                        <a href="https://www.linkedin.com/in/suryaprakash-b-71421522a/" target="_blank" class="flex items-center gap-4 text-gray-300 hover:text-brand-accent transition-colors p-3 rounded-2xl hover:bg-white/5 border border-transparent hover:border-white/10 w-fit">
-                            <div class="w-12 h-12 rounded-full glass flex items-center justify-center text-xl text-brand-accent">
+                        <a href="https://www.linkedin.com/in/suryaprakash-b-71421522a/" target="_blank"
+                            class="flex items-center gap-4 text-gray-300 hover:text-brand-accent transition-colors p-3 rounded-2xl hover:bg-white/5 border border-transparent hover:border-white/10 w-fit">
+                            <div
+                                class="w-12 h-12 rounded-full glass flex items-center justify-center text-xl text-brand-accent">
                                 <i class="ph-fill ph-linkedin-logo"></i>
                             </div>
                             <span class="font-medium">LinkedIn Profile</span>
                         </a>
                     </div>
                 </div>
-                
+
                 <div>
-                <form class="space-y-4" onsubmit="event.preventDefault(); showCustomMessage(event,this);">
-                    <input type="hidden" name="access_key" value="58a5513b-61ce-47b3-a73e-d44d3dce7af6">
-                    
-                    <div>
-                        <label class="block text-sm font-medium text-gray-400 mb-1 ml-2">Name</label>
-                        <!-- ADDED: name="name" -->
-                        <input id="senderName" name="name" type="text" required class="w-full bg-[#0a0a0a]/50 border border-white/10 rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-brand-neon focus:ring-1 focus:ring-brand-neon transition-all" placeholder="John Doe">
-                    </div>
-                    
-                    <div>
-                        <label class="block text-sm font-medium text-gray-400 mb-1 ml-2">Email</label>
-                        <!-- ADDED: name="email" -->
-                        <input id="senderEmail" name="email" type="email" required class="w-full bg-[#0a0a0a]/50 border border-white/10 rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-brand-neon focus:ring-1 focus:ring-brand-neon transition-all" placeholder="john@example.com">
-                    </div>
-                    
-                    <div>
-                        <label class="block text-sm font-medium text-gray-400 mb-1 ml-2">Message</label>
-                        <!-- ADDED: name="message" -->
-                        <textarea id="messageText" name="message" rows="4" required class="w-full bg-[#0a0a0a]/50 border border-white/10 rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-brand-neon focus:ring-1 focus:ring-brand-neon transition-all resize-none" placeholder="Let's build something..."></textarea>
-                    </div>
-                    
-                    <button type="submit" class="w-full py-4 rounded-2xl bg-white text-black font-bold text-lg hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all transform hover:-translate-y-1">
-                        Send Message
-                    </button>
-                </form>
-                    
+                    <form class="space-y-4" onsubmit="event.preventDefault(); showCustomMessage(event,this);">
+                        <input type="hidden" name="access_key" value="58a5513b-61ce-47b3-a73e-d44d3dce7af6">
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-400 mb-1 ml-2">Name</label>
+                            <!-- ADDED: name="name" -->
+                            <input id="senderName" name="name" type="text" required
+                                class="w-full bg-[#0a0a0a]/50 border border-white/10 rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-brand-neon focus:ring-1 focus:ring-brand-neon transition-all"
+                                placeholder="John Doe">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-400 mb-1 ml-2">Email</label>
+                            <!-- ADDED: name="email" -->
+                            <input id="senderEmail" name="email" type="email" required
+                                class="w-full bg-[#0a0a0a]/50 border border-white/10 rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-brand-neon focus:ring-1 focus:ring-brand-neon transition-all"
+                                placeholder="john@example.com">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-400 mb-1 ml-2">Message</label>
+                            <!-- ADDED: name="message" -->
+                            <textarea id="messageText" name="message" rows="4" required
+                                class="w-full bg-[#0a0a0a]/50 border border-white/10 rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-brand-neon focus:ring-1 focus:ring-brand-neon transition-all resize-none"
+                                placeholder="Let's build something..."></textarea>
+                        </div>
+
+                        <button type="submit"
+                            class="w-full py-4 rounded-2xl bg-white text-black font-bold text-lg hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all transform hover:-translate-y-1">
+                            Send Message
+                        </button>
+                    </form>
+
                     <!-- Custom Message Box for form submission -->
-                    <div id="form-message" class="hidden mt-4 p-4 rounded-xl glass border-brand-neon text-brand-neon text-center text-sm font-medium animate-pulse"></div>
+                    <div id="form-message"
+                        class="hidden mt-4 p-4 rounded-xl glass border-brand-neon text-brand-neon text-center text-sm font-medium animate-pulse">
+                    </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- ============================================== -->
+    <!-- AI CHATBOT UI WIDGET                           -->
+    <!-- ============================================== -->
+
+    <!-- Floating Chatbot Launcher Container -->
+    <div id="chatbot-launcher-container"
+        class="fixed bottom-6 right-6 z-50 flex flex-col items-end pointer-events-auto">
+        <!-- Floating Speech Bubble Callout -->
+        <div id="chatbot-callout"
+            class="mb-3 max-w-[260px] glass-card px-4 py-3 rounded-2xl rounded-br-sm border border-brand-neon/30 shadow-[0_10px_25px_rgba(0,0,0,0.6),0_0_15px_rgba(0,242,254,0.25)] flex items-start gap-2.5 transition-all duration-300">
+            <div class="w-2.5 h-2.5 rounded-full bg-brand-neon animate-ping shrink-0 mt-1.5"></div>
+            <div class="text-xs text-gray-200 cursor-pointer" id="chatbot-callout-text">
+                <span class="font-bold text-white block text-xs">Surya's AI Assistant</span>
+                Ask me about Surya's experience at Zscaler, AI projects & skills! 👋
+            </div>
+            <button id="chatbot-close-callout" aria-label="Dismiss callout"
+                class="text-gray-400 hover:text-white shrink-0 -mr-1 -mt-1 p-1">
+                <i class="ph ph-x text-xs"></i>
+            </button>
+        </div>
+
+        <!-- Floating Action Button (FAB) -->
+        <button id="chatbot-toggle-btn" aria-label="Open AI Chatbot"
+            class="relative group w-14 h-14 rounded-full bg-gradient-to-tr from-brand-accent via-brand-purple to-brand-neon p-[2px] shadow-[0_0_25px_rgba(0,242,254,0.4)] hover:shadow-[0_0_35px_rgba(139,92,246,0.6)] transform hover:scale-105 active:scale-95 transition-all duration-300">
+            <div
+                class="w-full h-full bg-[#09090f] rounded-full flex items-center justify-center relative overflow-hidden">
+                <div
+                    class="absolute inset-0 bg-gradient-to-tr from-brand-neon/20 to-brand-accent/20 opacity-0 group-hover:opacity-100 transition-opacity">
+                </div>
+                <!-- Chat Icon (Default) -->
+                <i id="chatbot-icon-chat"
+                    class="ph-fill ph-chat-teardrop-dots text-2xl text-brand-neon transition-transform duration-300 group-hover:scale-110"></i>
+                <!-- Close Icon (When open) -->
+                <i id="chatbot-icon-close"
+                    class="ph-bold ph-x text-2xl text-white hidden transition-transform duration-300"></i>
+            </div>
+            <!-- Online status green ping -->
+            <span class="absolute top-0 right-0 flex h-3.5 w-3.5">
+                <span
+                    class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span
+                    class="relative inline-flex rounded-full h-3.5 w-3.5 bg-emerald-400 border-2 border-[#050505]"></span>
+            </span>
+        </button>
+    </div>
+
+    <!-- Chatbot Window Modal -->
+    <div id="chatbot-window"
+        class="fixed bottom-24 right-4 sm:right-6 w-[calc(100vw-2rem)] sm:w-[410px] h-[580px] max-h-[82vh] z-50 rounded-3xl bg-[#09090f]/95 backdrop-blur-2xl border border-white/10 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.95),0_0_35px_rgba(139,92,246,0.2)] flex flex-col overflow-hidden transition-all duration-300 transform scale-95 opacity-0 pointer-events-none origin-bottom-right">
+
+        <!-- Header -->
+        <div class="px-5 py-3.5 border-b border-white/10 bg-white/[0.03] flex items-center justify-between relative">
+            <div class="flex items-center gap-3">
+                <div class="relative">
+                    <div
+                        class="w-10 h-10 rounded-full bg-gradient-to-tr from-brand-neon to-brand-accent p-[2px] flex items-center justify-center">
+                        <div class="w-full h-full rounded-full bg-[#0a0a12] flex items-center justify-center">
+                            <i class="ph-fill ph-robot text-lg text-brand-neon"></i>
+                        </div>
+                    </div>
+                    <span
+                        class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-400 border-2 border-[#09090f] rounded-full"></span>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <h3 class="font-display font-bold text-white text-base tracking-wide">Surya AI</h3>
+                        <span
+                            class="text-[10px] uppercase font-semibold px-2 py-0.5 rounded-full bg-brand-accent/20 border border-brand-accent/30 text-brand-accent">Agent</span>
+                    </div>
+                    <p class="text-xs text-gray-400 flex items-center gap-1.5">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                        Portfolio Assistant • Online
+                    </p>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-1">
+                <!-- Clear Chat Button -->
+                <button id="chatbot-clear-btn" title="Reset chat"
+                    class="w-8 h-8 rounded-full flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 transition-colors">
+                    <i class="ph ph-trash text-base"></i>
+                </button>
+                <!-- Close Button -->
+                <button id="chatbot-close-btn" title="Close chat"
+                    class="w-8 h-8 rounded-full flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 transition-colors">
+                    <i class="ph-bold ph-x text-base"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Messages Area -->
+        <div id="chatbot-messages" class="flex-1 overflow-y-auto p-4 space-y-4 text-sm chatbot-scroll">
+            <!-- Initial Welcome Message from Bot -->
+            <div class="chat-msg bot flex items-start gap-2.5 chat-bubble-animate">
+                <div
+                    class="w-7 h-7 rounded-full bg-brand-accent/20 border border-brand-accent/30 flex items-center justify-center text-brand-accent shrink-0 mt-0.5">
+                    <i class="ph-fill ph-sparkle text-sm"></i>
+                </div>
+                <div class="flex-1 space-y-2.5">
+                    <div
+                        class="bg-white/[0.05] border border-white/10 rounded-2xl rounded-tl-sm p-3.5 text-gray-200 leading-relaxed shadow-sm">
+                        <p class="font-semibold text-white mb-1">Hi there! 👋 I'm Surya's AI Assistant.</p>
+                        <p class="text-xs text-gray-300">
+                            I know everything about Surya's experience at <strong>Zscaler</strong>, his AI/ML projects
+                            (RAG, Autonomous Agents), skills, and how to get in touch.
+                        </p>
+                    </div>
+
+                    <!-- Quick Prompt Suggestions -->
+                    <div class="space-y-1.5">
+                        <p class="text-[11px] text-gray-400 font-medium px-1">Suggested questions:</p>
+                        <div class="flex flex-wrap gap-1.5">
+                            <button
+                                class="quick-chip text-xs px-3 py-1.5 rounded-full bg-white/5 border border-white/10 hover:border-brand-neon hover:text-brand-neon text-gray-300 transition-all text-left">
+                                🏢 Zscaler Experience
+                            </button>
+                            <button
+                                class="quick-chip text-xs px-3 py-1.5 rounded-full bg-white/5 border border-white/10 hover:border-brand-neon hover:text-brand-neon text-gray-300 transition-all text-left">
+                                🤖 AI & ML Projects
+                            </button>
+                            <button
+                                class="quick-chip text-xs px-3 py-1.5 rounded-full bg-white/5 border border-white/10 hover:border-brand-neon hover:text-brand-neon text-gray-300 transition-all text-left">
+                                🛠️ Tech Stack & Skills
+                            </button>
+                            <button
+                                class="quick-chip text-xs px-3 py-1.5 rounded-full bg-white/5 border border-white/10 hover:border-brand-neon hover:text-brand-neon text-gray-300 transition-all text-left">
+                                📬 How to Contact Surya?
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Typing Indicator -->
+        <div id="chatbot-typing" class="hidden px-5 py-2 items-center gap-2 text-xs text-gray-400 bg-white/[0.02]">
+            <div
+                class="w-6 h-6 rounded-full bg-brand-accent/20 border border-brand-accent/30 flex items-center justify-center text-brand-accent shrink-0">
+                <i class="ph-fill ph-robot text-xs"></i>
+            </div>
+            <div class="bg-white/5 border border-white/10 rounded-xl px-3 py-2 flex items-center gap-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-brand-neon animate-bounce"></span>
+                <span class="w-1.5 h-1.5 rounded-full bg-brand-purple animate-bounce"
+                    style="animation-delay: 0.15s"></span>
+                <span class="w-1.5 h-1.5 rounded-full bg-brand-accent animate-bounce"
+                    style="animation-delay: 0.3s"></span>
+            </div>
+            <span class="text-[11px] text-gray-400">Thinking...</span>
+        </div>
+
+        <!-- Chat Input Form -->
+        <div class="p-3 border-t border-white/10 bg-black/40">
+            <form id="chatbot-form" class="flex items-center gap-2">
+                <input id="chatbot-input" type="text" autocomplete="off" placeholder="Ask anything about Surya..."
+                    class="flex-1 bg-white/[0.05] border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-brand-neon focus:ring-1 focus:ring-brand-neon transition-all" />
+                <button id="chatbot-send-btn" type="submit" aria-label="Send message"
+                    class="w-10 h-10 rounded-xl bg-gradient-to-r from-brand-accent to-brand-neon text-black font-bold flex items-center justify-center hover:opacity-90 active:scale-95 transition-all shadow-[0_0_15px_rgba(0,242,254,0.3)] shrink-0 disabled:opacity-40 disabled:cursor-not-allowed">
+                    <i class="ph-fill ph-paper-plane-tilt text-base text-gray-950"></i>
+                </button>
+            </form>
+            <div class="flex justify-between items-center px-1 mt-1.5 text-[10px] text-gray-500">
+                <span>Press Enter to send</span>
+                <span>Bridging QA & AI</span>
+            </div>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer class="py-8 border-t border-white/10 bg-black/50 text-center text-gray-500 text-sm mt-12 relative z-10">
@@ -561,42 +906,42 @@
 
     <script>
         // Custom Message Box (Replaces alert)
-       // Custom Message Box (Replaces alert)
-function showCustomMessage(event, formElement) {
-    // 1. Stop page reload
-    event.preventDefault(); 
+        // Custom Message Box (Replaces alert)
+        function showCustomMessage(event, formElement) {
+            // 1. Stop page reload
+            event.preventDefault();
 
-    // 2. formElement is passed directly from HTML, no IDs needed!
-    const formData = new FormData(formElement);
+            // 2. formElement is passed directly from HTML, no IDs needed!
+            const formData = new FormData(formElement);
 
-    // 3. Send to Web3Forms
-    fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        body: formData
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            const msgBox = document.getElementById("form-message");
-            msgBox.innerText = "Message sent successfully! I will get back to you soon.";
-            
-            msgBox.classList.remove("hidden"); 
-            msgBox.classList.add("block");
-            
-            formElement.reset();
+            // 3. Send to Web3Forms
+            fetch("https://api.web3forms.com/submit", {
+                method: "POST",
+                body: formData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        const msgBox = document.getElementById("form-message");
+                        msgBox.innerText = "Message sent successfully! I will get back to you soon.";
 
-            setTimeout(() => {
-                msgBox.classList.add("hidden");
-                msgBox.classList.remove("block");
-            }, 5000);
-        } else {
-            alert("Something went wrong. Please try again.");
+                        msgBox.classList.remove("hidden");
+                        msgBox.classList.add("block");
+
+                        formElement.reset();
+
+                        setTimeout(() => {
+                            msgBox.classList.add("hidden");
+                            msgBox.classList.remove("block");
+                        }, 5000);
+                    } else {
+                        alert("Something went wrong. Please try again.");
+                    }
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                });
         }
-    })
-    .catch(error => {
-        console.error("Error:", error);
-    });
-}
 
         // Mobile Menu Toggle
         const btn = document.getElementById('mobile-menu-btn');
@@ -631,17 +976,17 @@ function showCustomMessage(event, formElement) {
         const ctx = canvas.getContext('2d');
         let width, height;
         let particles = [];
-        
+
         function resizeCanvas() {
             width = canvas.width = window.innerWidth;
             height = canvas.height = window.innerHeight;
         }
-        
+
         window.addEventListener('resize', () => {
             resizeCanvas();
             initParticles();
         });
-        
+
         class Particle {
             constructor() {
                 this.x = Math.random() * width;
@@ -650,16 +995,16 @@ function showCustomMessage(event, formElement) {
                 this.vy = (Math.random() - 0.5) * 0.8; // Vertical velocity
                 this.radius = Math.random() * 1.5 + 0.5; // Dot size
             }
-            
+
             update() {
                 this.x += this.vx;
                 this.y += this.vy;
-                
+
                 // Bounce off edges
                 if (this.x < 0 || this.x > width) this.vx = -this.vx;
                 if (this.y < 0 || this.y > height) this.vy = -this.vy;
             }
-            
+
             draw() {
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
@@ -667,7 +1012,7 @@ function showCustomMessage(event, formElement) {
                 ctx.fill();
             }
         }
-        
+
         function initParticles() {
             particles = [];
             // Dynamically calculate particle count based on screen size so mobile isn't cluttered
@@ -676,20 +1021,20 @@ function showCustomMessage(event, formElement) {
                 particles.push(new Particle());
             }
         }
-        
+
         function animateCanvas() {
             ctx.clearRect(0, 0, width, height);
-            
+
             for (let i = 0; i < particles.length; i++) {
                 particles[i].update();
                 particles[i].draw();
-                
+
                 // Connect particles if they are close enough
                 for (let j = i + 1; j < particles.length; j++) {
                     const dx = particles[i].x - particles[j].x;
                     const dy = particles[i].y - particles[j].y;
                     const distance = Math.sqrt(dx * dx + dy * dy);
-                    
+
                     if (distance < 150) {
                         ctx.beginPath();
                         ctx.moveTo(particles[i].x, particles[i].y);
@@ -704,11 +1049,348 @@ function showCustomMessage(event, formElement) {
             }
             requestAnimationFrame(animateCanvas);
         }
-        
+
         // Boot up the canvas animation
         resizeCanvas();
         initParticles();
         animateCanvas();
+
+        // ==============================================
+        // AI CHATBOT INTERACTIVE SCRIPT
+        // ==============================================
+        (function () {
+            const launcherContainer = document.getElementById('chatbot-launcher-container');
+            const toggleBtn = document.getElementById('chatbot-toggle-btn');
+            const iconChat = document.getElementById('chatbot-icon-chat');
+            const iconClose = document.getElementById('chatbot-icon-close');
+            const chatWindow = document.getElementById('chatbot-window');
+            const closeBtn = document.getElementById('chatbot-close-btn');
+            const clearBtn = document.getElementById('chatbot-clear-btn');
+            const messagesContainer = document.getElementById('chatbot-messages');
+            const chatForm = document.getElementById('chatbot-form');
+            const chatInput = document.getElementById('chatbot-input');
+            const typingIndicator = document.getElementById('chatbot-typing');
+            const callout = document.getElementById('chatbot-callout');
+            const closeCalloutBtn = document.getElementById('chatbot-close-callout');
+            const calloutText = document.getElementById('chatbot-callout-text');
+
+            let isOpen = false;
+
+            // Initial Welcome HTML for reset
+            const initialWelcomeHTML = messagesContainer ? messagesContainer.innerHTML : '';
+
+            // Toggle Chatbot Window
+            function toggleChat(state) {
+                isOpen = (typeof state === 'boolean') ? state : !isOpen;
+
+                if (isOpen) {
+                    chatWindow.classList.add('open');
+                    iconChat.classList.add('hidden');
+                    iconClose.classList.remove('hidden');
+                    if (callout) callout.classList.add('hidden');
+                    setTimeout(() => {
+                        chatInput.focus();
+                        scrollToBottom();
+                    }, 200);
+                } else {
+                    chatWindow.classList.remove('open');
+                    iconChat.classList.remove('hidden');
+                    iconClose.classList.add('hidden');
+                }
+            }
+
+            if (toggleBtn) {
+                toggleBtn.addEventListener('click', () => toggleChat());
+            }
+
+            if (closeBtn) {
+                closeBtn.addEventListener('click', () => toggleChat(false));
+            }
+
+            // Callout Interactions
+            if (closeCalloutBtn) {
+                closeCalloutBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    if (callout) callout.classList.add('hidden');
+                });
+            }
+
+            if (calloutText) {
+                calloutText.addEventListener('click', () => {
+                    toggleChat(true);
+                });
+            }
+
+            // Clear Chat
+            if (clearBtn) {
+                clearBtn.addEventListener('click', () => {
+                    messagesContainer.innerHTML = initialWelcomeHTML;
+                    attachChipListeners();
+                    scrollToBottom();
+                });
+            }
+
+            // Scroll helper
+            function scrollToBottom() {
+                if (messagesContainer) {
+                    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                }
+            }
+
+            // Format current time
+            function getTimeString() {
+                const now = new Date();
+                return now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            }
+
+            // Append User Message
+            function appendUserMessage(text) {
+                const msgWrapper = document.createElement('div');
+                msgWrapper.className = 'chat-msg user flex items-end justify-end gap-2 chat-bubble-animate';
+                msgWrapper.innerHTML = `
+                    <div class="max-w-[82%]">
+                        <div class="bg-gradient-to-r from-brand-accent to-brand-purple text-white px-4 py-2.5 rounded-2xl rounded-tr-sm text-sm shadow-md leading-relaxed break-words font-medium">
+                            ${escapeHTML(text)}
+                        </div>
+                        <div class="text-[10px] text-gray-400 text-right mt-1 px-1">
+                            ${getTimeString()}
+                        </div>
+                    </div>
+                `;
+                messagesContainer.appendChild(msgWrapper);
+                scrollToBottom();
+            }
+
+            // Append Bot Message
+            function appendBotMessage(htmlContent) {
+                const msgWrapper = document.createElement('div');
+                msgWrapper.className = 'chat-msg bot flex items-start gap-2.5 chat-bubble-animate';
+                msgWrapper.innerHTML = `
+                    <div class="w-7 h-7 rounded-full bg-brand-neon/10 border border-brand-neon/30 flex items-center justify-center text-brand-neon shrink-0 mt-0.5 shadow-[0_0_10px_rgba(0,242,254,0.2)]">
+                        <i class="ph-fill ph-robot text-sm"></i>
+                    </div>
+                    <div class="max-w-[85%] space-y-1">
+                        <div class="bg-white/[0.05] border border-white/10 rounded-2xl rounded-tl-sm p-3.5 text-gray-200 leading-relaxed text-sm shadow-sm">
+                            ${htmlContent}
+                        </div>
+                        <div class="text-[10px] text-gray-400 mt-1 px-1">
+                            Surya AI • ${getTimeString()}
+                        </div>
+                    </div>
+                `;
+                messagesContainer.appendChild(msgWrapper);
+
+                // Add smooth scroll listener to any in-bot anchor links
+                const links = msgWrapper.querySelectorAll('a[href^="#"]');
+                links.forEach(link => {
+                    link.addEventListener('click', () => {
+                        if (window.innerWidth < 640) {
+                            toggleChat(false);
+                        }
+                    });
+                });
+
+                scrollToBottom();
+            }
+
+            // Escape HTML for user inputs
+            function escapeHTML(str) {
+                return str.replace(/[&<>'"]/g,
+                    tag => ({
+                        '&': '&amp;',
+                        '<': '&lt;',
+                        '>': '&gt;',
+                        "'": '&#39;',
+                        '"': '&quot;'
+                    }[tag] || tag)
+                );
+            }
+
+            // Quick Prompt Chips Listener
+            function attachChipListeners() {
+                const chips = messagesContainer.querySelectorAll('.quick-chip');
+                chips.forEach(chip => {
+                    // Avoid attaching multiple listeners
+                    if (!chip.dataset.bound) {
+                        chip.dataset.bound = "true";
+                        chip.addEventListener('click', () => {
+                            const query = chip.textContent.trim().replace(/^[^\w]+/, ''); // remove leading emojis if needed
+                            handleUserQuery(query);
+                        });
+                    }
+                });
+            }
+
+            attachChipListeners();
+
+            // Form Submit Handler
+            if (chatForm) {
+                chatForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const text = chatInput.value.trim();
+                    if (!text) return;
+                    chatInput.value = '';
+                    handleUserQuery(text);
+                });
+            }
+
+            // Backend API Configuration
+            const BACKEND_API_URL = 'http://3.238.219.218:8000/ask';
+
+            // Markdown Formatter for Bot Response
+            function formatBotMarkdown(text) {
+                if (!text) return '';
+                // Escape raw HTML characters
+                let escaped = escapeHTML(text);
+
+                // Bold: **text**
+                escaped = escaped.replace(/\*\*(.*?)\*\*/g, '<strong class="text-white font-semibold">$1</strong>');
+
+                // Italic: *text*
+                escaped = escaped.replace(/(^|[^*])\*(?!\*)(.*?)\*/g, '$1<em class="text-gray-300">$2</em>');
+
+                // Inline code: `code`
+                escaped = escaped.replace(/`([^`]+)`/g, '<code class="px-1.5 py-0.5 rounded bg-white/10 text-brand-neon font-mono text-xs">$1</code>');
+
+                // Links: [text](url)
+                escaped = escaped.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-brand-neon underline hover:text-brand-purple transition-colors">$1</a>');
+
+                // Process lines for lists and paragraphs
+                const lines = escaped.split('\n');
+                let inList = false;
+                let htmlParts = [];
+
+                for (let line of lines) {
+                    const trimmed = line.trim();
+                    if (trimmed.startsWith('- ') || trimmed.startsWith('* ')) {
+                        if (!inList) {
+                            inList = true;
+                            htmlParts.push('<ul class="space-y-1 my-1.5 list-disc list-inside text-gray-300">');
+                        }
+                        htmlParts.push(`<li>${trimmed.substring(2)}</li>`);
+                    } else {
+                        if (inList) {
+                            inList = false;
+                            htmlParts.push('</ul>');
+                        }
+                        if (trimmed) {
+                            htmlParts.push(`<p class="mb-1.5 leading-relaxed">${line}</p>`);
+                        }
+                    }
+                }
+                if (inList) {
+                    htmlParts.push('</ul>');
+                }
+
+                return htmlParts.join('') || escaped;
+            }
+
+            // Process user input and send request to backend
+            async function handleUserQuery(query) {
+                appendUserMessage(query);
+
+                // Show typing indicator
+                if (typingIndicator) {
+                    typingIndicator.classList.remove('hidden');
+                    typingIndicator.classList.add('flex');
+                    scrollToBottom();
+                }
+
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 35000); // 35s timeout for LLM generation
+
+                try {
+                    // Send POST request to backend: http://3.238.219.218:8000/ask
+                    const response = await fetch(BACKEND_API_URL, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ query: query }),
+                        signal: controller.signal
+                    });
+
+                    clearTimeout(timeoutId);
+
+                    if (response.ok) {
+                        const data = await response.json();
+
+                        // Extract text from backend response
+                        let replyText = '';
+                        if (typeof data === 'string') {
+                            replyText = data;
+                        } else if (data && typeof data === 'object') {
+                            replyText = data.response || data.answer || data.result || data.output || data.message || JSON.stringify(data);
+                        } else {
+                            replyText = String(data);
+                        }
+
+                        const formattedHTML = formatBotMarkdown(replyText);
+                        appendBotMessage(formattedHTML);
+                    } else {
+                        // Non-200 HTTP response, use fallback
+                        console.warn('Backend responded with HTTP ' + response.status);
+                        const fallbackReply = generateAIResponse(query);
+                        appendBotMessage(`
+                            <div class="mb-2 text-xs text-brand-neon flex items-center gap-1.5 bg-brand-neon/10 border border-brand-neon/20 px-2.5 py-1.5 rounded-lg">
+                                <i class="ph ph-info"></i>
+                                <span>Portfolio Knowledge Engine Response:</span>
+                            </div>
+                            ${fallbackReply}
+                        `);
+                    }
+                } catch (err) {
+                    clearTimeout(timeoutId);
+                    console.error('Chatbot API request failed:', err);
+
+                    // If generateAIResponse is active, use it as fallback
+                    if (typeof generateAIResponse === 'function') {
+                        const fallbackReply = generateAIResponse(query);
+                        appendBotMessage(`
+                            <div class="mb-2 text-xs text-amber-300 flex items-center gap-1.5 bg-amber-500/10 border border-amber-500/20 px-2.5 py-1.5 rounded-lg">
+                                <i class="ph ph-warning"></i>
+                                <span>Backend unreachable (CORS or network error). Showing local response:</span>
+                            </div>
+                            ${fallbackReply}
+                        `);
+                    } else {
+                        // Display helpful CORS troubleshooting card
+                        appendBotMessage(`
+                            <div class="p-3 bg-red-500/10 border border-red-500/20 rounded-xl text-xs space-y-2.5">
+                                <div class="font-bold text-red-400 flex items-center gap-1.5">
+                                    <i class="ph ph-warning-circle text-base"></i>
+                                    <span>CORS Policy Error</span>
+                                </div>
+                                <p class="text-gray-300 leading-relaxed text-[12px]">
+                                    Your browser blocked the request to <code class="text-brand-neon font-mono bg-black/40 px-1 py-0.5 rounded">http://3.238.219.218:8000/ask</code> because CORS (Cross-Origin Resource Sharing) is not enabled on your FastAPI server.
+                                </p>
+                                <div class="pt-2 border-t border-white/10 text-[11px] text-gray-400 space-y-1.5">
+                                    <p class="font-semibold text-white">How to fix this in your FastAPI server:</p>
+                                    <p>Add <strong class="text-brand-accent">CORSMiddleware</strong> to your FastAPI code:</p>
+                                    <pre class="bg-black/80 text-gray-200 p-2.5 rounded-lg font-mono text-[10px] leading-relaxed overflow-x-auto border border-white/10">from fastapi.middleware.cors import CORSMiddleware
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)</pre>
+                                </div>
+                            </div>
+                        `);
+                    }
+                } finally {
+                    if (typingIndicator) {
+                        typingIndicator.classList.add('hidden');
+                        typingIndicator.classList.remove('flex');
+                    }
+                    scrollToBottom();
+                }
+            }
+
+        })();
     </script>
 </body>
+
 </html>
