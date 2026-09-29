@@ -1182,7 +1182,7 @@
                 scrollToBottom();
             }
 
-            // Append Bot Message
+            // Append Bot Message (Static)
             function appendBotMessage(htmlContent) {
                 const msgWrapper = document.createElement('div');
                 msgWrapper.className = 'chat-msg bot flex items-start gap-2.5 chat-bubble-animate w-full';
@@ -1212,6 +1212,63 @@
                 });
 
                 scrollToBottom();
+            }
+
+            // Append Streaming Bot Message (Token-by-token Typewriter)
+            function appendStreamingBotMessage(fullText, onComplete) {
+                const msgWrapper = document.createElement('div');
+                msgWrapper.className = 'chat-msg bot flex items-start gap-2.5 chat-bubble-animate w-full';
+                const timeStr = getTimeString();
+                msgWrapper.innerHTML = `
+                    <div class="w-7 h-7 rounded-full bg-brand-neon/10 border border-brand-neon/30 flex items-center justify-center text-brand-neon shrink-0 mt-0.5 shadow-[0_0_10px_rgba(0,242,254,0.2)]">
+                        <i class="ph-fill ph-robot text-sm"></i>
+                    </div>
+                    <div class="max-w-[85%] min-w-0 space-y-1">
+                        <div class="bot-text-container bg-white/[0.05] border border-white/10 rounded-2xl rounded-tl-sm p-3.5 text-gray-200 leading-relaxed text-sm shadow-sm break-words [overflow-wrap:anywhere]">
+                        </div>
+                        <div class="text-[10px] text-gray-400 mt-1 px-1">
+                            Surya AI • ${timeStr}
+                        </div>
+                    </div>
+                `;
+                messagesContainer.appendChild(msgWrapper);
+                scrollToBottom();
+
+                const container = msgWrapper.querySelector('.bot-text-container');
+                if (!fullText) {
+                    if (onComplete) onComplete();
+                    return;
+                }
+
+                // Tokenize words, whitespaces, and punctuation
+                const tokens = fullText.match(/(\r\n|\n|\r|\S+|\s+)/g) || [fullText];
+                let currentText = '';
+                let index = 0;
+                const tokenDelay = 16; // 16ms per token for smooth streaming
+
+                function streamStep() {
+                    if (index < tokens.length) {
+                        currentText += tokens[index];
+                        container.innerHTML = formatBotMarkdown(currentText);
+                        scrollToBottom();
+                        index++;
+                        setTimeout(streamStep, tokenDelay);
+                    } else {
+                        container.innerHTML = formatBotMarkdown(fullText);
+                        const links = msgWrapper.querySelectorAll('a[href^="#"]');
+                        links.forEach(link => {
+                            link.addEventListener('click', () => {
+                                if (window.innerWidth < 640) {
+                                    toggleChat(false);
+                                }
+                            });
+                        });
+                        scrollToBottom();
+                        if (onComplete) onComplete();
+                    }
+                }
+
+                streamStep();
             }
 
             // Escape HTML for user inputs
@@ -1320,17 +1377,27 @@
                     scrollToBottom();
                 }
 
+                // Generate or retrieve a persistent session ID for this visitor
+                let sessionId = localStorage.getItem('chat_session_id');
+                if (!sessionId) {
+                    sessionId = 'user_' + Math.random().toString(36).substring(2, 9);
+                    localStorage.setItem('chat_session_id', sessionId);
+                }
+
                 const controller = new AbortController();
                 const timeoutId = setTimeout(() => controller.abort(), 35000); // 35s timeout for LLM generation
 
                 try {
-                    // Send POST request to backend: http://3.238.219.218:8000/ask
+                    // Send POST request to backend with query and session_id
                     const response = await fetch(BACKEND_API_URL, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
                         },
-                        body: JSON.stringify({ query: query }),
+                        body: JSON.stringify({
+                            query: query,
+                            session_id: sessionId
+                        }),
                         signal: controller.signal
                     });
 
@@ -1349,8 +1416,13 @@
                             replyText = String(data);
                         }
 
-                        const formattedHTML = formatBotMarkdown(replyText);
-                        appendBotMessage(formattedHTML);
+                        // Hide typing indicator before streaming tokens
+                        if (typingIndicator) {
+                            typingIndicator.classList.add('hidden');
+                            typingIndicator.classList.remove('flex');
+                        }
+
+                        appendStreamingBotMessage(replyText);
                     } else {
                         // Non-200 HTTP response, use fallback
                         console.warn('Backend responded with HTTP ' + response.status);
