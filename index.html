@@ -237,7 +237,7 @@
             <div
                 class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 text-xs sm:text-sm font-medium text-gray-300 mb-8 backdrop-blur-md">
                 <span class="w-2 h-2 rounded-full bg-brand-neon animate-pulse"></span>
-                Hi, I'm Suryaprakassh Balusamy
+                Hi, I'm Suryaprakash Balusamy
             </div>
 
             <h1 class="font-display text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-tight mb-6">
@@ -260,7 +260,7 @@
                         View Projects <i class="ph ph-arrow-right"></i>
                     </span>
                 </a>
-                <a href="https://github.com/suryaprakashrbm-source"
+                <a href="https://github.com/Surya051002"
                     class="px-8 py-3 rounded-full glass border border-white/20 text-white font-medium hover:bg-white/10 transition-all flex items-center gap-2">
                     <i class="ph ph-github-logo text-xl"></i> GitHub Profile
                 </a>
@@ -567,7 +567,7 @@
                     <p class="text-gray-400 max-w-2xl">Exploring the intersection of AI and practical engineering
                         through hands-on development.</p>
                 </div>
-                <a href="https://github.com/suryaprakashrbm-source"
+                <a href="https://github.com/Surya051002"
                     class="text-brand-neon hover:text-brand-purple transition-colors flex items-center gap-2 group">
                     View full GitHub <i class="ph ph-arrow-right group-hover:translate-x-1 transition-transform"></i>
                 </a>
@@ -579,31 +579,40 @@
                 <div class="glass-card rounded-3xl overflow-hidden flex flex-col group h-full">
                     <div
                         class="h-48 w-full bg-gradient-to-br from-gray-800 to-gray-900 relative overflow-hidden flex items-center justify-center">
-                        <!-- Abstract placeholder graphic -->
                         <div
                             class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-brand-neon via-transparent to-transparent">
                         </div>
                         <i
-                            class="ph-duotone ph-database text-6xl text-brand-neon transform group-hover:scale-110 transition-transform duration-500"></i>
+                            class="ph-duotone ph-chat-teardrop-text text-6xl text-brand-neon transform group-hover:scale-110 transition-transform duration-500"></i>
                     </div>
                     <div class="p-8 flex flex-col flex-grow">
                         <div class="flex gap-2 mb-4 flex-wrap">
                             <span
                                 class="text-xs font-semibold px-2 py-1 rounded bg-white/5 border border-white/10 text-brand-neon">RAG</span>
                             <span
-                                class="text-xs font-semibold px-2 py-1 rounded bg-white/5 border border-white/10 text-gray-300">LLMs</span>
+                                class="text-xs font-semibold px-2 py-1 rounded bg-white/5 border border-white/10 text-gray-300">FastAPI</span>
                             <span
                                 class="text-xs font-semibold px-2 py-1 rounded bg-white/5 border border-white/10 text-gray-300">Vector
                                 DB</span>
+                            <span
+                                class="text-xs font-semibold px-2 py-1 rounded bg-white/5 border border-white/10 text-gray-300">LLMs</span>
                         </div>
-                        <h3 class="text-xl font-bold mb-3">Enterprise RAG System</h3>
-                        <p class="text-gray-400 text-sm mb-6 flex-grow">An intelligent assistant built utilizing
-                            Retrieval-Augmented Generation. Connects to custom document embeddings in a Vector Database
-                            to provide highly accurate, context-aware responses.</p>
-                        <a href="#"
-                            class="w-full py-3 rounded-xl glass border border-white/10 text-white font-medium text-center hover:bg-white/10 hover:border-brand-neon transition-all flex items-center justify-center gap-2">
-                            <i class="ph-fill ph-github-logo text-lg"></i> View GitHub
-                        </a>
+                        <h3 class="text-xl font-bold mb-3">Project Portfolio Chatbot</h3>
+                        <p class="text-gray-400 text-sm mb-6 flex-grow">An intelligent RAG-driven conversational AI
+                            assistant integrated directly into this portfolio. Features vector search over structured
+                            experience documents, token-by-token typewriter streaming, persistent session memory, and
+                            real-time interactive Q&amp;A.</p>
+                        <div class="flex gap-3 mt-auto">
+                            <a href="https://github.com/suryaprakashrbm-source/Portfolio_rag" target="_blank"
+                                class="flex-1 py-3 rounded-xl glass border border-white/10 text-white font-medium text-center hover:bg-white/10 hover:border-brand-neon transition-all flex items-center justify-center gap-2">
+                                <i class="ph-fill ph-github-logo text-lg"></i> GitHub
+                            </a>
+                            <button onclick="document.getElementById('chatbot-toggle-btn').click()"
+                                class="px-4 py-3 rounded-xl bg-brand-neon/10 border border-brand-neon/30 text-brand-neon font-medium hover:bg-brand-neon/20 transition-all flex items-center justify-center gap-1.5 text-sm"
+                                title="Try Live Demo">
+                                <i class="ph-fill ph-play text-sm"></i> Try Live
+                            </button>
+                        </div>
                     </div>
                 </div>
 
@@ -623,17 +632,18 @@
                                 class="text-xs font-semibold px-2 py-1 rounded bg-white/5 border border-white/10 text-brand-accent">AI
                                 Agents</span>
                             <span
+                                class="text-xs font-semibold px-2 py-1 rounded bg-white/5 border border-white/10 text-gray-300">Playwright</span>
+                            <span
                                 class="text-xs font-semibold px-2 py-1 rounded bg-white/5 border border-white/10 text-gray-300">Tool
                                 Calling</span>
-                            <span
-                                class="text-xs font-semibold px-2 py-1 rounded bg-white/5 border border-white/10 text-gray-300">Python</span>
                         </div>
-                        <h3 class="text-xl font-bold mb-3">Autonomous AI Agent</h3>
-                        <p class="text-gray-400 text-sm mb-6 flex-grow">An autonomous agent designed to write, review,
-                            and execute test cases. Utilizes LLM tool calling to interact with testing frameworks and
-                            report potential bugs directly into tracking systems.</p>
-                        <a href="#"
-                            class="w-full py-3 rounded-xl glass border border-white/10 text-white font-medium text-center hover:bg-white/10 hover:border-brand-accent transition-all flex items-center justify-center gap-2">
+                        <h3 class="text-xl font-bold mb-3">Autonomous End-to-End AI Software Developer & Tester</h3>
+                        <p class="text-gray-400 text-sm mb-6 flex-grow">An autonomous multi-agent system designed to
+                            streamline the software lifecycle. Analyzes project requirements, generates production code
+                            and resilient Playwright &amp; unit test suites, executes tests, detects regressions, and
+                            logs defects directly to Jira.</p>
+                        <a href="https://github.com/Surya051002/Agent_dev" target="_blank"
+                            class="w-full py-3 rounded-xl glass border border-white/10 text-white font-medium text-center hover:bg-white/10 hover:border-brand-accent transition-all flex items-center justify-center gap-2 mt-auto">
                             <i class="ph-fill ph-github-logo text-lg"></i> View GitHub
                         </a>
                     </div>
@@ -647,23 +657,28 @@
                             class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-brand-purple via-transparent to-transparent">
                         </div>
                         <i
-                            class="ph-duotone ph-waveform text-6xl text-brand-purple transform group-hover:scale-110 transition-transform duration-500"></i>
+                            class="ph-duotone ph-file-text text-6xl text-brand-purple transform group-hover:scale-110 transition-transform duration-500"></i>
                     </div>
                     <div class="p-8 flex flex-col flex-grow">
                         <div class="flex gap-2 mb-4 flex-wrap">
                             <span
-                                class="text-xs font-semibold px-2 py-1 rounded bg-white/5 border border-white/10 text-brand-purple">NLP</span>
+                                class="text-xs font-semibold px-2 py-1 rounded bg-white/5 border border-white/10 text-brand-purple">Autonomous
+                                Agents</span>
                             <span
-                                class="text-xs font-semibold px-2 py-1 rounded bg-white/5 border border-white/10 text-gray-300">Transformers</span>
+                                class="text-xs font-semibold px-2 py-1 rounded bg-white/5 border border-white/10 text-gray-300">NLP</span>
                             <span
-                                class="text-xs font-semibold px-2 py-1 rounded bg-white/5 border border-white/10 text-gray-300">FastAPI</span>
+                                class="text-xs font-semibold px-2 py-1 rounded bg-white/5 border border-white/10 text-gray-300">ATS
+                                Matching</span>
+                            <span
+                                class="text-xs font-semibold px-2 py-1 rounded bg-white/5 border border-white/10 text-gray-300">Python</span>
                         </div>
-                        <h3 class="text-xl font-bold mb-3">NLP Text Classifier</h3>
-                        <p class="text-gray-400 text-sm mb-6 flex-grow">A sophisticated backend service powered by
-                            Hugging Face transformers and FastAPI that parses massive server logs to detect anomalies
-                            and classify error patterns using Natural Language Processing.</p>
-                        <a href="#"
-                            class="w-full py-3 rounded-xl glass border border-white/10 text-white font-medium text-center hover:bg-white/10 hover:border-brand-purple transition-all flex items-center justify-center gap-2">
+                        <h3 class="text-xl font-bold mb-3">Autonomous AI Job Application & Resume Tailoring Agent</h3>
+                        <p class="text-gray-400 text-sm mb-6 flex-grow">An intelligent agentic workflow that parses
+                            target job postings, computes keyword and skill alignment, dynamically optimizes resume
+                            bullet points for high ATS compatibility, and automates customized cover letter and
+                            application generation.</p>
+                        <a href="https://github.com/Surya051002/Agent_job" target="_blank"
+                            class="w-full py-3 rounded-xl glass border border-white/10 text-white font-medium text-center hover:bg-white/10 hover:border-brand-purple transition-all flex items-center justify-center gap-2 mt-auto">
                             <i class="ph-fill ph-github-logo text-lg"></i> View GitHub
                         </a>
                     </div>
@@ -1364,6 +1379,65 @@
                 }
 
                 return htmlParts.join('') || escaped;
+            }
+
+            // Local Knowledge Base Fallback (used when backend is offline or waking up)
+            function generateAIResponse(query) {
+                const q = query.toLowerCase().trim();
+
+                // Projects Query
+                if (q.includes('project') || q.includes('bot') || q.includes('rag') || q.includes('developer') || q.includes('tester') || q.includes('resume') || q.includes('tailor') || q.includes('job') || q.includes('portfolio')) {
+                    return `Here are Surya's 3 featured AI & Engineering projects:
+
+1. **Project Portfolio Chatbot**
+An intelligent RAG-driven conversational AI assistant integrated right into this portfolio! Built with FastAPI, Vector DB embeddings, token-by-token typewriter streaming, and persistent session memory.
+[View GitHub Repository](https://github.com/suryaprakashrbm-source/Portfolio_rag)
+
+2. **Autonomous End-to-End AI Software Developer & Tester**
+An autonomous multi-agent system designed to streamline the SDLC. Analyzes software requirements, generates production code and Playwright/unit test suites, runs test execution, detects regressions, and logs defects directly to Jira via MCP.
+[View GitHub Profile](https://github.com/suryaprakashrbm-source)
+
+3. **Autonomous AI Job Application & Resume Tailoring Agent**
+An intelligent agentic pipeline that parses target job descriptions, computes ATS compatibility scores, dynamically optimizes resume bullet points, and automates customized cover letter & job application workflows.
+[View GitHub Profile](https://github.com/suryaprakashrbm-source)`;
+                }
+
+                // Experience & Zscaler Query
+                if (q.includes('zscaler') || q.includes('experience') || q.includes('work') || q.includes('tosca') || q.includes('playwright') || q.includes('role')) {
+                    return `**Associate Software Engineer QA at Zscaler** (Bangalore, Oct 2024 - Present):
+- **100% Regression Coverage**: Automated and maintained 50+ end-to-end test suites in Tricentis Tosca across complex Salesforce ecosystems.
+- **Modern Web Automation**: Executed Playwright POC modernizing web testing capabilities, successfully delivering 2+ core production modules.
+- **RAG Chatbot QA**: Pioneered quality assurance strategies for RAG AI chatbots in Python, leveraging **Weights & Biases** and **RAGAS** for output evaluation, hallucination detection, and drift tracking.
+- **Defect Discovery**: Uncovered 50+ critical software defects including 5+ production-blocking bugs, partnering with engineering on root-cause analysis.
+- **Pod Leadership**: Spearheaded QA for the Salesforce Lead-to-Opportunity (L2O) automation pod.`;
+                }
+
+                // Skills & Tech Stack Query
+                if (q.includes('skill') || q.includes('stack') || q.includes('tech') || q.includes('python') || q.includes('java') || q.includes('tool')) {
+                    return `Surya's Core Technical Skills:
+- **AI & ML**: RAG Architecture, Autonomous AI Agents, RAGAS, LLM-as-a-Judge, Weights & Biases, Vector Databases, Transformers, Prompt Engineering.
+- **Test Automation**: Tricentis Tosca, Playwright, REST API Testing, End-to-End & Regression Testing, Postman.
+- **Programming & Frameworks**: Python, Java, JavaScript, FastAPI, SQL, SOQL.
+- **Enterprise Platforms**: Salesforce (L2O, Q2O, GCS), Jira MCP, Docker, Git.`;
+                }
+
+                // Contact & Meeting Query
+                if (q.includes('contact') || q.includes('mail') || q.includes('email') || q.includes('reach') || q.includes('phone') || q.includes('meeting') || q.includes('schedule') || q.includes('connect')) {
+                    return `You can connect with Surya directly:
+- 📧 **Email**: [suryaprakashrbm@gmail.com](mailto:suryaprakashrbm@gmail.com)
+- 💼 **LinkedIn**: [linkedin.com/in/suryaprakash-b-71421522a](https://www.linkedin.com/in/suryaprakash-b-71421522a/)
+- 🐙 **GitHub**: [github.com/suryaprakashrbm-source](https://github.com/suryaprakashrbm-source)
+- 📱 **Phone**: +91 6374105504
+- 📍 **Location**: Bangalore, India`;
+                }
+
+                // Default Fallback
+                return `I'm Surya's AI Portfolio Assistant! Surya is an Associate SWE QA at Zscaler specializing in AI Agents, RAG evaluation, and enterprise test automation.
+You can ask me about:
+- **Projects**: Portfolio Chatbot, Autonomous AI Dev & Tester, and Resume Tailoring Agent
+- **Zscaler Experience**: Tosca, Playwright, and RAG QA
+- **Tech Stack & Skills**
+- **How to Connect & Schedule a Chat**`;
             }
 
             // Process user input and send request to backend
